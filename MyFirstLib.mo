@@ -3,7 +3,7 @@ package MyFirstLib
   connector myPort
     Real p; //Druck
     flow Real mflow; //Massenfluss
-    Real bsp "Variablen-GitBsp";
+    Real hallobeispiel "Variablen-GitBsp";
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Ellipse(
             extent={{-94,94},{96,-96}},
