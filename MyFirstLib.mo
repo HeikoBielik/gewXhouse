@@ -1,6 +1,7 @@
 within ;
 package MyFirstLib
   connector myPort
+    Real beispiel941 = 941 "testetst";
     Real p; //Druck
     flow Real mflow; //Massenfluss
     Real hallomichael = 0 " haha";
