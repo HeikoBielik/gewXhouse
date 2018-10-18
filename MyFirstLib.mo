@@ -23,7 +23,7 @@ package MyFirstLib
     Real h(start=1)
                    "Behälterfüllstand";
     parameter Real patmo=100000 "Atmosphärendruck";
-
+  parameter Real a = 0;
   equation
 
     myPort1.p=roh*g*h+patmo+0.5*roh*myPort1.mflow/roh/A*0.1;
@@ -37,6 +37,7 @@ package MyFirstLib
             fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
             preserveAspectRatio=false)));
   end Tank;
+
 
   model Test
     Tank Henry(h(start=2))
