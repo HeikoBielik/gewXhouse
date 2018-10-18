@@ -3,6 +3,7 @@ package MyFirstLib
   connector myPort
     Real p; //Druck
     flow Real mflow; //Massenfluss
+    Real hallomichael = 0 " haha";
     Real hallobeispiel "Variablen-GitBsp";
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Ellipse(
@@ -22,7 +23,6 @@ package MyFirstLib
     Real h(start=1)
                    "Behälterfüllstand";
     parameter Real patmo=100000 "Atmosphärendruck";
-    parameter Real a = 0;
 
   equation
 
@@ -37,7 +37,6 @@ package MyFirstLib
             fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
             preserveAspectRatio=false)));
   end Tank;
-
 
   model Test
     Tank Henry(h(start=2))
