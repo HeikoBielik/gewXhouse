@@ -53,6 +53,7 @@ package MyFirstLib
   end Test;
 
 model sun
+//
   parameter Real lat = 48.8785888 "latitude";
   parameter Real long = 8.7172797 "longitude";
   parameter Real pi = 3.141592654;
@@ -81,4 +82,5 @@ equation
   annotation(
     experiment(StartTime = 0, StopTime = 100000, Tolerance = 1e-06, Interval = 66.7111));
 end sun;
+
 end MyFirstLib;
