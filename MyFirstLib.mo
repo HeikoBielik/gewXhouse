@@ -53,6 +53,7 @@ package MyFirstLib
   end Test;
 
 model sun
+//
   parameter Real lat = 48.8785888 "latitude";
   parameter Real long = 8.7172797 "longitude";
   parameter Real pi = 3.141592654;
@@ -91,6 +92,7 @@ model sun
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 57.6));
 end sun;
 
+<<<<<<< HEAD
 
 
 
@@ -120,4 +122,6 @@ end sun;
 
 
 
+=======
+>>>>>>> 9e9b6138161cd8ba128bd2fd518e4bccefa90fbb
 end MyFirstLib;
