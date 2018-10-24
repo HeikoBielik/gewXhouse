@@ -2,8 +2,8 @@ within ;
 package MyFirstLib
   connector myPort
     Real beispiel941 = 941 "testetst";
-    Real p;     //Druck
-    flow Real mflow;     //Massenfluss
+    Real p;             //Druck
+    flow Real mflow;             //Massenfluss
     Real hallomichael = 0 " haha";
     Real hallobeispiel "Variablen-GitBsp";
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -20,7 +20,7 @@ package MyFirstLib
           iconTransformation(extent={{-10,-100},{10,-80}})));
     parameter Real A=0.1 "Querschnitt Stutzen";
     parameter Real roh=1 "Mediendichte";
-    constant Real g=Modelica.Constants.g_n;     //Erdbeschleunigung
+    constant Real g=Modelica.Constants.g_n;             //Erdbeschleunigung
     Real h(start=1)
                    "Behälterfüllstand";
     parameter Real patmo=100000 "Atmosphärendruck";
@@ -61,24 +61,63 @@ model sun
   Real n "day number, such that day = 1 on the 1st January";
   Real m "part of the year";
   Real omega "hour angle";
-  Real alpha, elevation "altitude angle";
-  Real beta, azimuth "the solar azimuth angle";
+  Real beta, elevation "altitude angle";
+  Real alpha, azimuth "the solar azimuth angle";
   Real hour "actual time";
   Real phi "time equation";
-  Real K;
-equation
-  hour = time / 60 / 60;
-  n = (month - 1) * 30.3 + day;
-  K = pi / 180;
-  m = (n-1+(hour-12)/24)/365;
-  delta=(0.006918-0.399912*cos(2*pi*m)+0.070257*sin(2*pi*m)-0.006758*cos(4*pi*m)+0.000907*sin(4*pi*m)-0.002697*cos(6*pi*m)+0.00148*sin(6*pi*m))/K;
-  phi=229.18*(0.000075+0.001868*cos(2*pi*m)-0.032077*sin(2*pi*m)-0.014615*cos(4*pi*m)-0.040849*sin(4*pi*m));
-  omega = (hour * 60 + phi + 4* long - 60) / 4 - 180;
-  alpha = sin(K * lat) * sin(K * delta) + cos(K * lat) * cos(K * delta) * cos(K * omega);
-  beta = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
-  elevation = asin(alpha)/K;
-  azimuth = if der(beta) < 0 then acos(beta)/K else 360-acos(beta)/K;
+  Real K "deg to rad";
+  Modelica.SIunits.HeatFlux Qd "direct radiation";
+  Modelica.SIunits.HeatFlux Qa "area radiation";
+  Real J;
+  //Real T;
+  Modelica.SIunits.Area A=9 "Area";
+  equation
+    Qd = -3000 + 5000 * sin(0.000035 * time);
+    hour = time / 60 / 60;
+    n = (month - 1) * 30.3 + day;
+    K = pi / 180;
+    m = (n-1+(hour-12)/24)/365;
+    delta=(0.006918-0.399912*cos(2*pi*m)+0.070257*sin(2*pi*m)-0.006758*cos(4*pi*m)+0.000907*sin(4*pi*m)-0.002697*cos(6*pi*m)+0.00148*sin(6*pi*m))/K;
+    phi=229.18*(0.000075+0.001868*cos(2*pi*m)-0.032077*sin(2*pi*m)-0.014615*cos(4*pi*m)-0.040849*sin(4*pi*m));
+    omega = (hour * 60 + phi + 4* long - 60) / 4 - 180;
+    beta = sin(K * lat) * sin(K * delta) + cos(K * lat) * cos(K * delta) * cos(K * omega);
+    alpha = -(sin(K * lat) * beta - sin(K * delta)) / (cos(K * lat) * sin(acos(beta)));
+    elevation = asin(beta)/K;
+    azimuth = if der(alpha) < 0 then acos(alpha)/K else 360-acos(alpha)/K;
+    J = if Qd>=0 then Qd * sin(beta) else 0;
+    Qa = Qd *(cos(90)*cos(abs(A))*sin(beta)*tan(elevation));
+    //T = (P/(roh*A))^(1/4);
   annotation(
-    experiment(StartTime = 0, StopTime = 100000, Tolerance = 1e-06, Interval = 66.7111));
+    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 57.6));
 end sun;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end MyFirstLib;
