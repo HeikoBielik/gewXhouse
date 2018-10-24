@@ -1,2 +1,0 @@
-package testpackage
-end testpackage;
