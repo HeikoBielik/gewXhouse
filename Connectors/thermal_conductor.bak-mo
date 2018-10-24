@@ -1,0 +1,4 @@
+within gewXhouse.Connectors;
+
+connector thermal_conductor
+end thermal_conductor;
