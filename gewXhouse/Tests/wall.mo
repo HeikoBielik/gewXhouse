@@ -3,9 +3,9 @@ within gewXhouse.Tests;
 model wall
 
   Modelica.SIunits.SpecificHeatCapacityAtConstantPressure cp = 1005 "air J/kg.K";
-  Modelica.SIunits.ThermalConductivity lambda = 0.76 "glass W/m.K";
-  Modelica.SIunits.Mass m = 30 "kg";
-  Modelica.SIunits.Area S = 10 "m2";
+  parameter Modelica.SIunits.ThermalConductivity lambda = 0.76 "glass W/m.K";
+  parameter Modelica.SIunits.Mass m = 30 "kg";
+  parameter Modelica.SIunits.Area S = 10 "m2";
   parameter Modelica.SIunits.Length w = 0.05 "m";
   Modelica.SIunits.Temp_C T_in (start = 20) "°C";
   parameter Modelica.SIunits.Temp_C T_out = 0 "°C";
