@@ -29,7 +29,21 @@ model Sun
   Real FlaechenstrahlungPositiv5;
   Real FlaechenstrahlungPositiv6;
   
+  
+  
   Real Direktstrahlung;
+  
+   // Real p = 100000;
+  //Real V = 24.75;
+ Real Tdelta (start= 293.15);
+
+  Real ma;
+  Real QWaermegesamt;
+  Real cv = 717;
+  Real FlaecheLeistung1,FlaecheLeistung2, FlaecheLeistung3, FlaecheLeistung4, FlaecheLeistung5,FlaecheLeistung6;
+  Real q;
+  
+  
 equation
   hour = time / 60 / 60;
   n = (month - 1) * 30.3 + day;
@@ -56,6 +70,26 @@ equation
   Flaechenstrahlung6 = Direktstrahlung * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
   FlaechenstrahlungPositiv6 = if Flaechenstrahlung6 < 0 then 0 else Flaechenstrahlung6;
   
+
+
+    
+  FlaecheLeistung1 = FlaechenstrahlungPositiv1*6;
+  FlaecheLeistung2 = FlaechenstrahlungPositiv2*6;
+  FlaecheLeistung3 = FlaechenstrahlungPositiv3*6;
+  FlaecheLeistung4 = FlaechenstrahlungPositiv4*6;
+  FlaecheLeistung5 = FlaechenstrahlungPositiv5*6.3;
+  FlaecheLeistung6 = FlaechenstrahlungPositiv6*6.3;
+  
+   QWaermegesamt =FlaecheLeistung1+ FlaecheLeistung2+ FlaecheLeistung3+ FlaecheLeistung4+ FlaecheLeistung5+ FlaecheLeistung6;
+   
+ // ideales Gas-Gesetz 
+ // p*V= ma*R*T1;
+ ma= 29.14;
+
+
+
+der(q) = QWaermegesamt;
+Tdelta = q /(ma*cv);
 
 annotation(
       Icon(graphics = {Ellipse(lineColor = {255, 170, 0}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(origin = {0, 64.67}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {0.754717, -64.9998}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {52.0283, -16.6979}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-77.9717, -17.9243}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.9717, 22.1229}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.8585, -74.8582}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.6227, 44.7644}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.3584, -52.8771}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3)}));
