@@ -89,7 +89,7 @@ equation
 
 
 der(q) = QWaermegesamt;
-Tdelta = q /(ma*cv);
+Tdelta = QWaermegesamt /(ma*cv);
 
 annotation(
       Icon(graphics = {Ellipse(lineColor = {255, 170, 0}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(origin = {0, 64.67}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {0.754717, -64.9998}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {52.0283, -16.6979}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-77.9717, -17.9243}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.9717, 22.1229}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.8585, -74.8582}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.6227, 44.7644}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.3584, -52.8771}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3)}));
