@@ -16,12 +16,12 @@ model Sun
   Real phi "time equation";
   Real K;
   
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Sn "Flächenstrahlung north";
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Se "Flächenstrahlung east";
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Ss "Flächenstrahlung south";
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Sw "Flächenstrahlung west";
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Sre "Flächenstrahlung roof east";
-  Modelica.SIunits.RadiantEnergyFluenceRate I_Srw "Flächenstrahlung roof west";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sn  "surface radiation north";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Se  "surface radiation east";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Ss  "surface radiation south";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sw  "surface radiation west";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sre "surface radiation roof east";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Srw "surface radiation roof west";
 
   Real Ip_Sn;
   Real Ip_Se;
@@ -47,40 +47,44 @@ model Sun
    Placement(visible = true, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
   gewXhouse.Connectors.heat_radiation Radiation annotation(
     Placement(visible = true, transformation(origin = {68, -38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {99, -55}, extent = {{-53, -53}, {53, 53}}, rotation = 0)));
+
 equation
-  hour = time / 60 / 60;
-  n = (month - 1) * 30.3 + day;
-  K = pi / 180;
-  m = (n - 1 + (hour - 12) / 24) / 365;
+
+  hour  = time / 60 / 60;
+  n     = (month - 1) * 30.3 + day;
+  K     = pi / 180;
+  m     = (n - 1 + (hour - 12) / 24) / 365;
   delta = (0.006918 - 0.399912 * cos(2 * pi * m) + 0.070257 * sin(2 * pi * m) - 0.006758 * cos(4 * pi * m) + 0.000907 * sin(4 * pi * m) - 0.002697 * cos(6 * pi * m) + 0.00148 * sin(6 * pi * m)) / K;
-  phi = 229.18 * (0.000075 + 0.001868 * cos(2 * pi * m) - 0.032077 * sin(2 * pi * m) - 0.014615 * cos(4 * pi * m) - 0.040849 * sin(4 * pi * m));
+  phi   = 229.18 * (0.000075 + 0.001868 * cos(2 * pi * m) - 0.032077 * sin(2 * pi * m) - 0.014615 * cos(4 * pi * m) - 0.040849 * sin(4 * pi * m));
   omega = (hour * 60 + phi + 4 * long - 60) / 4 - 180;
   alpha = sin(K * lat) * sin(K * delta) + cos(K * lat) * cos(K * delta) * cos(K * omega);
-  beta = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
-  elevation = asin(alpha) / K;
-  azimuth = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
-  I_dir = (-1) * 3000 + 5000 * sin(0.000035 * time);
-  I_Sn = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
-  Ip_Sn = if I_Sn < 0 then 0 else I_Sn;
-  I_Se = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 90 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Se = if I_Se < 0 then 0 else I_Se;
-  I_Ss = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 180 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Ss = if I_Ss < 0 then 0 else I_Ss;
-  I_Sw = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 270 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Sw = if I_Sw < 0 then 0 else I_Sw;
-  I_Sre = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 90 * K)) * sin(45 * K) * tan(elevation * K));
-  Ip_Sre = if I_Sre < 0 then 0 else I_Sre;
-  I_Srw = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
-  Ip_Srw = if I_Srw < 0 then 0 else I_Srw;
+  beta  = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
   
-  Q_Sn = Ip_Sn*Sn.A;
-  Q_Se = Ip_Se*Se.A;
-  Q_Ss = Ip_Ss*Ss.A;
-  Q_Sw = Ip_Sw*Sw.A;
+  elevation = asin(alpha) / K;
+  azimuth   = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
+  
+  I_dir  = (-1) * 3000 + 5000 * sin(0.000035 * time);
+  I_Sn   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
+  Ip_Sn  = if (I_dir < 0) or (I_Sn < 0) then 0 else I_Sn;
+  I_Se   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 90 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Se  = if (I_dir < 0) or (I_Se < 0) then 0 else I_Se;
+  I_Ss   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 180 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Ss  = if (I_dir < 0) or (I_Ss < 0) then 0 else I_Ss;
+  I_Sw   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 270 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Sw  = if (I_dir < 0) or (I_Sw < 0) then 0 else I_Sw;
+  I_Sre  = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 90 * K)) * sin(45 * K) * tan(elevation * K));
+  Ip_Sre = if (I_dir < 0) or (I_Sre < 0) then 0 else I_Sre;
+  I_Srw  = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
+  Ip_Srw = if (I_dir < 0) or (I_Srw < 0) then 0 else I_Srw;
+  
+  Q_Sn  = Ip_Sn*Sn.A;
+  Q_Se  = Ip_Se*Se.A;
+  Q_Ss  = Ip_Ss*Ss.A;
+  Q_Sw  = Ip_Sw*Sw.A;
   Q_Sre = Ip_Sre*Sre.A;
   Q_Srw = Ip_Srw*Srw.A;
   
-  Radiation.Q =Q_Sn+ Q_Se+ Q_Ss+ Q_Sw+ Q_Sre+ Q_Srw;
+  Radiation.Q = Q_Sn+ Q_Se+ Q_Ss+ Q_Sw+ Q_Sre+ Q_Srw;
 
 
 annotation(

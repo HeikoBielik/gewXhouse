@@ -2,14 +2,15 @@ within gewXhouse.Examples;
 
 model ExampleHouse
   gewXhouse.Models.Sun sun annotation(
-    Placement(visible = true, transformation(origin = {-53, 37}, extent = {{-35, -35}, {35, 35}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-92, 90}, extent = {{-56, -56}, {56, 56}}, rotation = 0)));
   gewXhouse.Models.Greenhouse.Greenhouse greenhouse annotation(
-    Placement(visible = true, transformation(origin = {37, -23}, extent = {{-55, -55}, {55, 55}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-1, 11}, extent = {{-55, -55}, {55, 55}}, rotation = 0)));
   gewXhouse.Models.Environment environment annotation(
-    Placement(visible = true, transformation(origin = {-56, -50}, extent = {{-26, -26}, {26, 26}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {0, 0}, extent = {{-98, -98}, {98, 98}}, rotation = 0)));
 equation
-  connect(environment.environment, greenhouse.environment) annotation(
-    Line(points = {{-35, -49}, {-22, -49}, {-22, -30}, {-8, -30}}));
+  connect(greenhouse.environment, environment.environment) annotation(
+    Line(points = {{44, 4}, {78, 4}, {78, 2}, {78, 2}}));
   connect(sun.Radiation, greenhouse.Radiation) annotation(
-    Line(points = {{-18, 18}, {12, 18}, {12, -5}}, color = {87, 87, 87}));
+    Line(points = {{-37, 59}, {-26, 59}, {-26, 29}}, color = {87, 87, 87}));
+  
 end ExampleHouse;
