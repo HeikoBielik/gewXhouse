@@ -6,9 +6,9 @@ model wall
   parameter Modelica.SIunits.ThermalConductivity lambda = 0.76 "glass W/m.K";
   parameter Modelica.SIunits.Mass m = 30 "kg";
   parameter Modelica.SIunits.Area S = 10 "m2";
-  parameter Modelica.SIunits.Length w = 0.05 "m";
-  Modelica.SIunits.Temp_C T_in (start = 20) "°C";
-  parameter Modelica.SIunits.Temp_C T_out = 0 "°C";
+  parameter Modelica.SIunits.Length w = 0.005 "m";
+  Modelica.SIunits.Temp_C T_in (start = 0) "°C";
+  parameter Modelica.SIunits.Temp_C T_out = 20 "°C";
   Modelica.SIunits.HeatFlowRate Q_flow "J/s";
   Modelica.SIunits.HeatCapacity C_in "J/K";
   

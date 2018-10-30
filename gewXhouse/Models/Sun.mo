@@ -15,35 +15,38 @@ model Sun
   Real hour "actual time";
   Real phi "time equation";
   Real K;
-  Real Flaechenstrahlung1 "Flächenstrahlung Seitenwand1";
-  Real Flaechenstrahlung2 "Flächenstrahlung Seitenwand2";
-  Real Flaechenstrahlung3 "Flächenstrahlung Seitenwand3";
-  Real Flaechenstrahlung4 "Flächenstrahlung Seitenwand4";
-  Real Flaechenstrahlung5 "Flächenstrahlung Dach";
-  Real Flaechenstrahlung6 "Flächenstrahlung Dach";
+  
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sn "Flächenstrahlung north";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Se "Flächenstrahlung east";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Ss "Flächenstrahlung south";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sw "Flächenstrahlung west";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Sre "Flächenstrahlung roof east";
+  Modelica.SIunits.RadiantEnergyFluenceRate I_Srw "Flächenstrahlung roof west";
 
-  Real FlaechenstrahlungPositiv1;
-  Real FlaechenstrahlungPositiv2;
-  Real FlaechenstrahlungPositiv3;
-  Real FlaechenstrahlungPositiv4;
-  Real FlaechenstrahlungPositiv5;
-  Real FlaechenstrahlungPositiv6;
-  
-  
-  
-  Real Direktstrahlung;
-  
-   // Real p = 100000;
-  //Real V = 24.75;
- Real Tdelta (start= 293.15);
+  Real Ip_Sn;
+  Real Ip_Se;
+  Real Ip_Ss;
+  Real Ip_Sw;
+  Real Ip_Sre;
+  Real Ip_Srw;
 
-  Real ma;
-  Real QWaermegesamt;
-  Real cv = 717;
-  Real FlaecheLeistung1,FlaecheLeistung2, FlaecheLeistung3, FlaecheLeistung4, FlaecheLeistung5,FlaecheLeistung6;
-  Real q;
+  Modelica.SIunits.RadiantEnergyFluenceRate I_dir "W/m2";   //I_dir
+  Modelica.SIunits.HeatFlowRate Q_Sn,Q_Se, Q_Ss, Q_Sw, Q_Sre,Q_Srw;   //J/s
   
-  
+  gewXhouse.Models.Greenhouse.surface_north     Sn   annotation(
+    Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.surcafe_east      Se   annotation(
+    Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.surface_west      Sw   annotation(
+    Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.surface_roof_east Sre  annotation(
+    Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.surface_roof_west Srw  annotation(
+    Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.surface_south     Ss   annotation(
+   Placement(visible = true, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Connectors.heat_radiation Radiation annotation(
+    Placement(visible = true, transformation(origin = {68, -38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {99, -55}, extent = {{-53, -53}, {53, 53}}, rotation = 0)));
 equation
   hour = time / 60 / 60;
   n = (month - 1) * 30.3 + day;
@@ -56,40 +59,29 @@ equation
   beta = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
   elevation = asin(alpha) / K;
   azimuth = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
-  Direktstrahlung = (-1) * 3000 + 5000 * sin(0.000035 * time);
-  Flaechenstrahlung1 = Direktstrahlung * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
-  FlaechenstrahlungPositiv1 = if Flaechenstrahlung1 < 0 then 0 else Flaechenstrahlung1;
-  Flaechenstrahlung2 = Direktstrahlung * (cos(90 * K) + cos(abs(azimuth * K - 90 * K)) * sin(90 * K) * tan(elevation * K));
-  FlaechenstrahlungPositiv2 = if Flaechenstrahlung2 < 0 then 0 else Flaechenstrahlung2;
-  Flaechenstrahlung3 = Direktstrahlung * (cos(90 * K) + cos(abs(azimuth * K - 180 * K)) * sin(90 * K) * tan(elevation * K));
-  FlaechenstrahlungPositiv3 = if Flaechenstrahlung3 < 0 then 0 else Flaechenstrahlung3;
-  Flaechenstrahlung4 = Direktstrahlung * (cos(90 * K) + cos(abs(azimuth * K - 270 * K)) * sin(90 * K) * tan(elevation * K));
-  FlaechenstrahlungPositiv4 = if Flaechenstrahlung4 < 0 then 0 else Flaechenstrahlung4;
-  Flaechenstrahlung5 = Direktstrahlung * (cos(45 * K) + cos(abs(azimuth * K - 90 * K)) * sin(45 * K) * tan(elevation * K));
-  FlaechenstrahlungPositiv5 = if Flaechenstrahlung5 < 0 then 0 else Flaechenstrahlung5;
-  Flaechenstrahlung6 = Direktstrahlung * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
-  FlaechenstrahlungPositiv6 = if Flaechenstrahlung6 < 0 then 0 else Flaechenstrahlung6;
+  I_dir = (-1) * 3000 + 5000 * sin(0.000035 * time);
+  I_Sn = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
+  Ip_Sn = if I_Sn < 0 then 0 else I_Sn;
+  I_Se = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 90 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Se = if I_Se < 0 then 0 else I_Se;
+  I_Ss = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 180 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Ss = if I_Ss < 0 then 0 else I_Ss;
+  I_Sw = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 270 * K)) * sin(90 * K) * tan(elevation * K));
+  Ip_Sw = if I_Sw < 0 then 0 else I_Sw;
+  I_Sre = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 90 * K)) * sin(45 * K) * tan(elevation * K));
+  Ip_Sre = if I_Sre < 0 then 0 else I_Sre;
+  I_Srw = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
+  Ip_Srw = if I_Srw < 0 then 0 else I_Srw;
   
-
-
-    
-  FlaecheLeistung1 = FlaechenstrahlungPositiv1*6;
-  FlaecheLeistung2 = FlaechenstrahlungPositiv2*6;
-  FlaecheLeistung3 = FlaechenstrahlungPositiv3*6;
-  FlaecheLeistung4 = FlaechenstrahlungPositiv4*6;
-  FlaecheLeistung5 = FlaechenstrahlungPositiv5*6.3;
-  FlaecheLeistung6 = FlaechenstrahlungPositiv6*6.3;
+  Q_Sn = Ip_Sn*Sn.A;
+  Q_Se = Ip_Se*Se.A;
+  Q_Ss = Ip_Ss*Ss.A;
+  Q_Sw = Ip_Sw*Sw.A;
+  Q_Sre = Ip_Sre*Sre.A;
+  Q_Srw = Ip_Srw*Srw.A;
   
-   QWaermegesamt =FlaecheLeistung1+ FlaecheLeistung2+ FlaecheLeistung3+ FlaecheLeistung4+ FlaecheLeistung5+ FlaecheLeistung6;
-   
- // ideales Gas-Gesetz 
- // p*V= ma*R*T1;
- ma= 29.14;
+  Radiation.Q =Q_Sn+ Q_Se+ Q_Ss+ Q_Sw+ Q_Sre+ Q_Srw;
 
-
-
-der(q) = QWaermegesamt;
-Tdelta = QWaermegesamt /(ma*cv);
 
 annotation(
       Icon(graphics = {Ellipse(lineColor = {255, 170, 0}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(origin = {0, 64.67}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {0.754717, -64.9998}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {52.0283, -16.6979}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-77.9717, -17.9243}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.9717, 22.1229}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.8585, -74.8582}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.6227, 44.7644}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.3584, -52.8771}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3)}));
