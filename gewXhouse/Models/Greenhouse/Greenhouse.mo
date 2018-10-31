@@ -15,10 +15,13 @@ model Greenhouse
   parameter Modelica.SIunits.Mass m = 29.14;
   parameter Modelica.SIunits.SpecificHeatCapacityAtConstantPressure R = 287;
   //childobjects
+  
+   gewXhouse.Connectors.environment environment annotation(
+    Placement(visible = true, transformation(origin = {80, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {80, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Connectors.heat_flow                Wall annotation(
-    Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-30, -30}, {30, 30}}, rotation = 0), iconTransformation(origin = {-80, -36}, extent = {{-30, -30}, {30, 30}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-81, -45}, extent = {{-45, -45}, {45, 45}}, rotation = 0), iconTransformation(origin = {-80, -36}, extent = {{-30, -30}, {30, 30}}, rotation = 0)));
   gewXhouse.Connectors.heat_radiation      Radiation annotation(
-  Placement(visible = true, transformation(origin = {-45, 33}, extent = {{-61, -61}, {61, 61}}, rotation = 0), iconTransformation(origin = {-46, 32}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
+  Placement(visible = true, transformation(origin = {-81, -17}, extent = {{-61, -61}, {61, 61}}, rotation = 0), iconTransformation(origin = {-86, 34}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
 
   gewXhouse.Models.Greenhouse.surface_north     Sn   annotation(
     Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
@@ -32,8 +35,10 @@ model Greenhouse
     Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
   gewXhouse.Models.Greenhouse.surface_south     Ss   annotation(
     Placement(visible = true, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
-  gewXhouse.Connectors.environment environment annotation(
-    Placement(visible = true, transformation(origin = {-80, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-80, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
+  
+ 
+
 equation
 //p*V = R*m*T;
   A = l*w;
