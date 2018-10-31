@@ -2,22 +2,14 @@ within gewXhouse.Models;
 
 model Environment
 
-<<<<<<< HEAD
-  Modelica.Blocks.Sources.CombiTimeTable temperature( extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,fileName = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt", offset = {0}, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, startTime = 1, table = fill(0.0, 0, 2), tableName = "temp", tableOnFile = true, timeScale = 60, verboseRead = true)  annotation(
-=======
+
   Modelica.Blocks.Sources.CombiTimeTable temperature( extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,fileName = "C:/Users/Gunterson/Documents/GitHub/gewXhouse/temp.txt", offset = {0}, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, startTime = 1, table = fill(0.0, 0, 2), tableName = "temp", tableOnFile = true, timeScale = 60, verboseRead = true)  annotation(
->>>>>>> 3ba36c1f7dfa7c434d31a19e85fbb1faee6e9371
     Placement(visible = true, transformation(origin = {-50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Connectors.environment environment annotation(
     Placement(visible = true, transformation(origin = {40, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {80, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1 annotation(
     Placement(visible = true, transformation(origin = {-8, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-<<<<<<< HEAD
-equation
-  connect(environment.Tout, temperature.y[1]) annotation(
-    Line(points = {{40, 34}, {-30, 34}, {-30, 70}, {-40, 70}, {-40, 70}, {-38, 70}, {-38, 70}}));
-=======
   
   Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin1 annotation(
     Placement(visible = true, transformation(origin = {26, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -28,7 +20,6 @@ equation
     Line(points = {{37, 70}, {40, 70}, {40, 34}}, color = {0, 0, 127}));
   connect(fromKelvin1.Kelvin, toKelvin1.Kelvin) annotation(
     Line(points = {{14, 70}, {4, 70}}, color = {0, 0, 127}));
->>>>>>> 3ba36c1f7dfa7c434d31a19e85fbb1faee6e9371
   connect(toKelvin1.Celsius, temperature.y[1]) annotation(
     Line(points = {{-20, 70}, {-38, 70}}, color = {0, 0, 127}));
   annotation(

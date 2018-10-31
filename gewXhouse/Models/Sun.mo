@@ -61,7 +61,7 @@ equation
   beta  = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
   
   elevation = asin(alpha) / K;
-<<<<<<< HEAD
+
   azimuth = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
   I_dir = (-1) * 3000 + 5000 * sin(0.000035 * time);
   I_Sn = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
@@ -76,23 +76,7 @@ equation
   Ip_Sre = if I_Sre < 0 then 0 else if elevation <0 then 0 else I_Sre;
   I_Srw = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
   Ip_Srw = if I_Srw < 0 then 0 else if elevation <0 then 0 else I_Srw;
-=======
-  azimuth   = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
-  
-  I_dir  = (-1) * 3000 + 5000 * sin(0.000035 * time);
-  I_Sn   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 0 * K)) * sin(90 * K) * tan((if elevation < 0 then 0 else elevation) * K));
-  Ip_Sn  = if (I_dir < 0) or (I_Sn < 0) then 0 else I_Sn;
-  I_Se   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 90 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Se  = if (I_dir < 0) or (I_Se < 0) then 0 else I_Se;
-  I_Ss   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 180 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Ss  = if (I_dir < 0) or (I_Ss < 0) then 0 else I_Ss;
-  I_Sw   = I_dir * (cos(90 * K) + cos(abs(azimuth * K - 270 * K)) * sin(90 * K) * tan(elevation * K));
-  Ip_Sw  = if (I_dir < 0) or (I_Sw < 0) then 0 else I_Sw;
-  I_Sre  = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 90 * K)) * sin(45 * K) * tan(elevation * K));
-  Ip_Sre = if (I_dir < 0) or (I_Sre < 0) then 0 else I_Sre;
-  I_Srw  = I_dir * (cos(45 * K) + cos(abs(azimuth * K - 270 * K)) * sin(45 * K) * tan(elevation * K));
-  Ip_Srw = if (I_dir < 0) or (I_Srw < 0) then 0 else I_Srw;
->>>>>>> 115d130669f684dd744b27cda9bfbebf411f5dbf
+
   
   Q_Sn  = Ip_Sn*Sn.A;
   Q_Se  = Ip_Se*Se.A;
