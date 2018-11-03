@@ -7,6 +7,13 @@ model surface_roof_east
   
   Real A;
   
+  parameter Real a = 45 "angular position relative to ground";
+  parameter Real o = 90 "angular position relative to north";
+  
+  Modelica.SIunits.RadiantEnergyFluenceRate I "surface radiation roof west";
+  Modelica.SIunits.HeatFlowRate Q "J/s";
+  Real Ip;
+  
 equation
 
   //l2 = sqrt(2*1.5^2);

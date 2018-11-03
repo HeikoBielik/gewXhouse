@@ -2,10 +2,17 @@ within gewXhouse.Models.Greenhouse;
 
 model surface_north
 
-parameter Real l  = 3;
+  parameter Real l  = 3;
   parameter Real h1 = 2;
   parameter Real h2 = 1.5;
   Real A;
+  
+  parameter Real a = 90 "angular position relative to ground";
+  parameter Real o = 0 "angular position relative to north";
+  
+  Modelica.SIunits.RadiantEnergyFluenceRate I "surface radiation roof west";
+  Modelica.SIunits.HeatFlowRate Q "J/s";
+  Real Ip;
   
 equation
   
