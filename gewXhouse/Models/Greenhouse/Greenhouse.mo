@@ -42,6 +42,7 @@ model Greenhouse
     Placement(visible = false, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
   gewXhouse.Models.Greenhouse.surface_south     Ss   annotation(
     Placement(visible = true, transformation(origin = {0, 0}, extent = {{-100, -100}, {100, 100}}, rotation = 0)));
+  gewXhouse.Models.Greenhouse.ground g;
   
 equation
 
@@ -89,7 +90,7 @@ equation
   S = Ss.A + Sn.A + Sw.A + Se.A + Srw.A + Sre.A;
   
   Wall.Q        = S * Wall.c * (environment.Tout - T) / Wall.w;
-  C_in          = m * cp;
+  C_in          = m * cp+g.Ce;
   C_in * der(T) = Wall.Q + Q_tot;
   
   annotation(
