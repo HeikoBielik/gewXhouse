@@ -3,6 +3,16 @@ within gewXhouse.Models.Greenhouse;
 model ground
   "Boden wird als Speichermasse im Raum angenommen"
 
+  parameter Real a = 0 "angular position relative to ground";
+  parameter Real o = 0 "angular position relative to north";
+  Real I;
+  Real Ip;
+  Real Q;
+  Real Qw "Wärmeübertragung Boden->Luft";
+  Real Rue=0.125;
+  
+  Modelica.SIunits.Temp_C T(start = 20)  "Temperature inside";
+  
   parameter Modelica.SIunits.Length l = 3 "Länge";
   parameter Modelica.SIunits.Length b = 3 "Breite";
   parameter Modelica.SIunits.Length t=0.30 "Tiefe Boden";
