@@ -3,7 +3,7 @@ within gewXhouse.Connectors;
 connector heat_flow
 
   parameter Modelica.SIunits.ThermalConductivity c = 0.76 "thermal_conductivity";
-  parameter Modelica.SIunits.Length w = 0.005 "diameter";
+  parameter Modelica.SIunits.Length w = 0.01 "diameter";
   Modelica.SIunits.HeatFlowRate Q "transportet Energy";
     
 annotation(

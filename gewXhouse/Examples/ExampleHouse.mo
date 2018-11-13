@@ -12,4 +12,6 @@ equation
     Line(points = {{78, 2}, {44, 2}, {44, 0}, {44, 0}}));
   connect(sun.Radiation, greenhouse.Radiation) annotation(
     Line(points = {{-37, 59}, {-48, 59}, {-48, 26}}, color = {87, 87, 87}));
+  annotation(
+    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
 end ExampleHouse;
