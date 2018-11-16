@@ -3,7 +3,7 @@ within gewXhouse.Models;
 model Environment
 
 
-  Modelica.Blocks.Sources.CombiTimeTable temperature( extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,fileName = "C:/Users/Cemil/Documents/GitHub/gewXhouse/temp.txt", offset = {0}, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, startTime = 1, table = fill(0.0, 0, 2), tableName = "temp", tableOnFile = true, timeScale = 60, verboseRead = true)  annotation(
+  Modelica.Blocks.Sources.CombiTimeTable temperature( extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,fileName = "C:/Users/Gunterson/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt", offset = {0}, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, startTime = 1, table = fill(0.0, 0, 2), tableName = "temp", tableOnFile = true, timeScale = 60, verboseRead = true)  annotation(
     Placement(visible = true, transformation(origin = {-50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Connectors.environment environment annotation(
     Placement(visible = true, transformation(origin = {40, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {80, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

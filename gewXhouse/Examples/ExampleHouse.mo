@@ -9,9 +9,9 @@ model ExampleHouse
     Placement(visible = true, transformation(origin = {0, 0}, extent = {{-98, -98}, {98, 98}}, rotation = 0)));
 equation
   connect(environment.environment, greenhouse.environment) annotation(
-    Line(points = {{78, 2}, {44, 2}, {44, 0}, {44, 0}}));
+    Line(points = {{78, 2}, {44, 2}, {44, 0}}));
   connect(sun.Radiation, greenhouse.Radiation) annotation(
     Line(points = {{-37, 59}, {-48, 59}, {-48, 26}}, color = {87, 87, 87}));
   annotation(
-    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
+    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 78.6885));
 end ExampleHouse;

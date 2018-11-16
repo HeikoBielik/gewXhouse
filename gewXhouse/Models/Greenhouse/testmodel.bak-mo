@@ -1,0 +1,12 @@
+within gewXhouse.Models.Greenhouse;
+
+model testmodel
+  gewXhouse.Models.Greenhouse.surface surface1(h = 2, h_roof = 1, is_roof = true, l = 3)    annotation(
+    Placement(visible = true, transformation(origin = {-50, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
+equation
+
+   
+annotation(
+    experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.1));
+end testmodel;

@@ -16,7 +16,6 @@ model surface_roof_east
   
 equation
 
-  //l2 = sqrt(2*1.5^2);
   A  = l*h;
   
 annotation(

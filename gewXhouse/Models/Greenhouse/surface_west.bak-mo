@@ -4,6 +4,7 @@ model surface_west
 
   parameter Real l = 3;
   parameter Real h = 2;
+  
   Real A;
   
   parameter Real a = 90  "angular position relative to ground";
