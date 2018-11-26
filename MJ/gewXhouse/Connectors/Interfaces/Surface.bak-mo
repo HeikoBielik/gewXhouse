@@ -1,0 +1,25 @@
+within gewXhouse.Connectors.Interfaces;
+
+connector Surface
+
+  Models.Greenhouse.M_surface surface;
+  
+  /*Models.Greenhouse.M_surface sN "North surface";
+  Models.Greenhouse.M_surface sE "East surface";
+  Models.Greenhouse.M_surface sS "South surface";
+  Models.Greenhouse.M_surface sW "West surface";
+  Models.Greenhouse.M_surface rE "East roof surface";
+  Models.Greenhouse.M_surface rW "West roof surface";*/
+  
+  Models.Greenhouse.M_surface floor "Floor";
+  
+  Modelica.SIunits.Area total "Total surface";
+  
+  //Modelica.SIunits.Angle pitch "Roof pitch of the house";
+  //Modelica.SIunits.Angle north "Orientation of the house 'north direction'";
+  
+  Modelica.SIunits.Volume volume "Inner volume of the house";
+  
+  annotation(
+    Icon(graphics = {Rectangle(fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}})}));
+end Surface;
