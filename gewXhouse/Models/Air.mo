@@ -1,27 +1,29 @@
 within gewXhouse.Models;
 
 model Air
-  /******************** Parameters ********************/
-  parameter Modelica.SIunits.Density rho = 1.2;
-  parameter Modelica.SIunits.SpecificHeatCapacity c_p = 1e3;
-  /******************** Variables ********************/
-  Modelica.SIunits.HeatFlowRate Q_flow "Heat flow rate from port_a -> port_b";
-  Modelica.SIunits.Temperature T;
-  Modelica.SIunits.Mass m "kg";
-  Modelica.SIunits.HeatCapacity C "J/K";
-  /******************** Connectors ********************/
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
-    Placement(visible = true,transformation(extent = {{-32, -10}, {-12, 10}}, rotation = 0), iconTransformation(extent = {{-10, 40}, {10, 60}}, rotation = 0)));
+
+  parameter Modelica.Blocks.Interfaces.RealInput rho = 1.2 "density" annotation(
+    Placement(visible = true, transformation(origin = {-50, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+  parameter Modelica.Blocks.Interfaces.RealInput c_p = 1e3 "specific thermal capacity" annotation(
+    Placement(visible = true, transformation(origin = {-50, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Interfaces.RealInput volumeHouse annotation(
-    Placement(visible = true, transformation(origin = {-32, -38}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -56}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
+    Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, -56}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
+  
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
+    Placement(visible = true, transformation(extent = {{-10, -80}, {10, -60}}, rotation = 0), iconTransformation(extent = {{-10, 40}, {10, 60}}, rotation = 0)));
+  gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
+    Placement(visible = true, transformation(origin = {0, -7.10543e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 equation
-  m = rho * volumeHouse;
-  C = m * c_p;
-  der(T) = Q_flow / C;
-// Balance on the floor
-  heatPort.T = T;
-  heatPort.Q_flow = Q_flow;
+  connect(rho, heatCapacitor.rho) annotation(
+    Line(points = {{-50, -26}, {-32, -26}, {-32, -12}, {-16, -12}, {-16, -12}}, color = {0, 0, 127}));
+  connect(heatCapacitor.c_p, c_p) annotation(
+    Line(points = {{-16, -4}, {-44, -4}, {-44, -4}, {-50, -4}}, color = {0, 0, 127}));
+  connect(volumeHouse, heatCapacitor.volume) annotation(
+    Line(points = {{-50, 20}, {-38, 20}, {-38, 4}, {-16, 4}}, color = {0, 0, 127}));
+  connect(heatPort, heatCapacitor.port) annotation(
+    Line(points = {{0, -70}, {0, -70}, {0, -20}, {0, -20}}, color = {191, 0, 0}));
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
-    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Text(extent = {{-110, -54}, {110, -114}}, textString = "%name"), Ellipse(lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-60, 60}, {60, -60}}, endAngle = 360)}));
+    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Text(extent = {{-110, -54}, {110, -114}}, textString = "%name"), Ellipse(lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-60, 60}, {60, -60}}, endAngle = 360)}),
+  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
 end Air;

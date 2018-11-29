@@ -9,4 +9,6 @@ Surface
 Surfaces
 Cover
 Musterhaus
-Floor2
+HeatCapacitor
+ThermalConductor
+Radiation

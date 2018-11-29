@@ -1,30 +1,60 @@
 within gewXhouse.Models;
 
 model Cover
-  /******************** Parameters ********************/
-  parameter Modelica.SIunits.Density rho = 2600 "Cover density (glass)";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_p = 840 "Cover specific thermal capacity";
-  parameter Modelica.SIunits.Length w = 1e-3 "Thickness of the cover";
-  parameter Modelica.SIunits.ThermalConductivity lambda = 0.76 "glass W/m.K";
-  /******************** Variables ********************/
-  Modelica.SIunits.HeatFlowRate Q_flow "Heat flow rate from port_a -> port_b";
-  Modelica.SIunits.Temperature T;
-  Modelica.SIunits.HeatCapacity C;
-  /******************** Connectors ********************/
+  parameter Modelica.Blocks.Interfaces.RealInput w = 6e-3 "density" annotation(
+    Placement(visible = true, transformation(origin = {-78, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Blocks.Interfaces.RealInput totalSurface = 15 "m2" annotation(
+    Placement(visible = true, transformation(origin = {-54, 66}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+  parameter Modelica.Blocks.Interfaces.RealInput lambda = 0.76  "W/m.K" annotation(
+    Placement(visible = true, transformation(origin = {-18, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Blocks.Interfaces.RealInput rho = 2600 "density" annotation(
+    Placement(visible = true, transformation(origin = {-30, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Blocks.Interfaces.RealInput c_p = 840 "specific thermal capacity" annotation(
+    Placement(visible = true, transformation(origin = {-30, 44}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{-10, -10}, {10, 10}})));
-  Connectors.environment environment annotation(
-    Placement(visible = true, transformation(origin = {90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput totalSurface annotation(
-    Placement(visible = true, transformation(origin = {-84, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+    Placement(visible = true,transformation(extent = {{-10, -20}, {10, 0}}, rotation = 0), iconTransformation(extent = {{-10, 0}, {10, 20}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
+    Placement(visible = true, transformation(origin = {78, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Models.ThermalConductor thermalConductor annotation(
+    Placement(visible = true, transformation(origin = {50, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Product product annotation(
+    Placement(visible = true, transformation(origin = {-18, 72}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
+    Placement(visible = true, transformation(origin = {20, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Modelica.Blocks.Math.Product product1 annotation(
+    Placement(visible = true, transformation(origin = {26, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Division division annotation(
+    Placement(visible = true, transformation(origin = {-12, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  C = rho * w * totalSurface * c_p;
-  der(T) = Q_flow / C;
-  environment.Q_flow = totalSurface * lambda * (environment.T - T) / w;
-// Balance on the cover
-  heatPort.Q_flow = Q_flow + environment.Q_flow;
-  heatPort.T = T;
+  connect(product1.y, thermalConductor.G) annotation(
+    Line(points = {{38, -56}, {50, -56}, {50, -18}, {50, -18}}, color = {0, 0, 127}));
+  connect(product1.u2, division.y) annotation(
+    Line(points = {{14, -62}, {0, -62}}, color = {0, 0, 127}));
+  connect(product1.u1, lambda) annotation(
+    Line(points = {{14, -50}, {4, -50}, {4, -34}, {-18, -34}}, color = {0, 0, 127}));
+  connect(division.u1, totalSurface) annotation(
+    Line(points = {{-24, -56}, {-40, -56}, {-40, 66}, {-54, 66}}, color = {0, 0, 127}));
+  connect(division.u2, w) annotation(
+    Line(points = {{-24, -68}, {-64, -68}, {-64, 78}, {-78, 78}, {-78, 78}}, color = {0, 0, 127}));
+  connect(heatCapacitor.port, thermalConductor.port_a) annotation(
+    Line(points = {{20, 20}, {20, 6}, {20, 6}, {20, -10}, {30, -10}, {30, -10}, {40, -10}}, color = {191, 0, 0}));
+  connect(heatCapacitor.volume, product.y) annotation(
+    Line(points = {{4, 44}, {-2, 44}, {-2, 72}, {-6, 72}, {-6, 72}}, color = {0, 0, 127}));
+  connect(heatCapacitor.c_p, c_p) annotation(
+    Line(points = {{4, 36}, {-10, 36}, {-10, 44}, {-30, 44}, {-30, 44}}, color = {0, 0, 127}));
+  connect(heatCapacitor.rho, rho) annotation(
+    Line(points = {{4, 28}, {-22, 28}, {-22, 28}, {-30, 28}}, color = {0, 0, 127}));
+  connect(product.u2, totalSurface) annotation(
+    Line(points = {{-30, 66}, {-50, 66}, {-50, 66}, {-54, 66}}, color = {0, 0, 127}));
+  connect(product.u1, w) annotation(
+    Line(points = {{-30, 78}, {-72, 78}, {-72, 78}, {-75, 78}, {-75, 78}, {-78, 78}}, color = {0, 0, 127}));
+  connect(thermalConductor.port_b, environment) annotation(
+    Line(points = {{60, -10}, {78, -10}}, color = {191, 0, 0}));
+  connect(heatPort, thermalConductor.port_a) annotation(
+    Line(points = {{0, -10}, {40, -10}, {40, -10}, {40, -10}}, color = {191, 0, 0}));
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
-    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}));
+    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
+  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
 end Cover;

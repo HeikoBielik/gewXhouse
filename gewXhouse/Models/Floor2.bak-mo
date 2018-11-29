@@ -2,14 +2,14 @@ within gewXhouse.Models;
 
 model Floor2
   /******************** Parameters ********************/
-  parameter Real rho = 0.001 "g/cm3";
-  parameter Real c = 8 "1.26 W/m2.K Humus";
-  parameter Real c_p=1000 "J/Kg*K spezifische Wärmekapazität Gartenerde";
-  parameter Real w = 0.1 "floor width";
+  parameter Modelica.SIunits.Density rho = 0.001 "g/cm3";
+  parameter Modelica.SIunits.SurfaceCoefficientOfHeatTransfer c = 8 "1.26 W/m2.K Humus";
+  parameter Modelica.SIunits.SpecificHeatCapacityAtConstantPressure c_p=1000 "J/Kg*K spezifische Wärmekapazität Gartenerde";
+  parameter Modelica.SIunits.Length w = 0.1 "floor width";
   /******************** Initialization ********************/
-  Real Q_flow "Heat flow rate from port_a -> port_b";
-  Real T;
-  Real C "J/K";
+  Modelica.SIunits.HeatFlowRate Q_flow "Heat flow rate from port_a -> port_b";
+  Modelica.SIunits.Temperature T;
+  Modelica.SIunits.HeatCapacity C "J/K";
   /******************** Connectors ********************/
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
     Placement(transformation(extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{-10, -10}, {10, 10}})));

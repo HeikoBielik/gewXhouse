@@ -19,12 +19,12 @@ model Musterhaus "Definition of the house dimensions and orientation"
   //Models.Surface surfaces[N] "north, east, south, west, east roof, west roof";
   gewXhouse.Models.Solar_model solar_model(surfacesPitch = surfacesPitch, surfacesNorth = surfacesNorth) annotation(
     Placement(visible = true, transformation(origin = {-60, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Models.Floor floor(T(start = 293.15))  annotation(
+  Models.Floor floor annotation(
     Placement(visible = true, transformation(origin = {-20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(
     Placement(visible = true, transformation(origin = {90, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Connectors.environment environment annotation(
-    Placement(visible = true, transformation(origin = {110, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
+    Placement(visible = true, transformation(origin = {106, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Connectors.Interfaces.HeatFluxInput I annotation(
     Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
@@ -34,17 +34,19 @@ model Musterhaus "Definition of the house dimensions and orientation"
     Placement(visible = true, transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   output Modelica.Blocks.Interfaces.RealOutput posHouse[2] annotation(
     Placement(visible = true, transformation(origin = {-120, -40}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Models.Cover cover(T(start = 293.15))  annotation(
+  Models.Cover cover annotation(
     Placement(visible = true, transformation(origin = {60, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput totalSurface "total surface" annotation(
+  inner Modelica.Blocks.Interfaces.RealOutput totalSurface "total surface" annotation(
     Placement(visible = true, transformation(origin = {52, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput floorArea "floor area" annotation(
+  inner Modelica.Blocks.Interfaces.RealOutput floorArea "floor area" annotation(
     Placement(visible = true, transformation(origin = {-28, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Air air(T(start = 293.15)) annotation(
+  Models.Air air annotation(
     Placement(visible = true, transformation(origin = {20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput volumeHouse annotation(
+  inner Modelica.Blocks.Interfaces.RealOutput volumeHouse annotation(
     Placement(visible = true, transformation(origin = {12, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(cover.environment, environment) annotation(
+    Line(points = {{74, -20}, {106, -20}}));
   connect(volumeHouse, air.volumeHouse) annotation(
     Line(points = {{12, -70}, {12, -70}, {12, -32}, {12, -32}}, color = {0, 0, 127}));
   connect(air.heatPort, floor.heatPort) annotation(
@@ -65,8 +67,6 @@ equation
     Line(points = {{100, 10}, {110, 10}}, color = {0, 0, 127}));
   connect(floor.heatPort, temperatureSensor.port) annotation(
     Line(points = {{-20, -20}, {-20, 10}, {80, 10}}, color = {191, 0, 0}));
-  connect(cover.environment, environment) annotation(
-    Line(points = {{74, -20}, {108, -20}, {108, -20}, {110, -20}}));
   floorSurface.A = length * width;
   floorArea = floorSurface.A;
   sD = length * length * tan(pitch) / 4;
