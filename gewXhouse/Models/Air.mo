@@ -6,7 +6,7 @@ model Air
     Placement(visible = true, transformation(origin = {-50, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   parameter Modelica.Blocks.Interfaces.RealInput c_p = 1e3 "specific thermal capacity" annotation(
     Placement(visible = true, transformation(origin = {-50, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Modelica.Blocks.Interfaces.RealInput volumeHouse annotation(
+  parameter Modelica.Blocks.Interfaces.RealInput volumeHouse annotation(
     Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, -56}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
   
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(

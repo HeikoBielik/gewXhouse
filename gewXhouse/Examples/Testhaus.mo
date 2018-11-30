@@ -5,7 +5,7 @@ model Testhaus
     Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.Musterhaus house(height = 2, length = 3, north = 0, pitch = 0.523599, width = 3) annotation(
     Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Environment environment annotation(
+  gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt")  annotation(
     Placement(visible = true, transformation(origin = {30, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Interaction.Show.RealValue realValue annotation(
     Placement(visible = true, transformation(origin = {46, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

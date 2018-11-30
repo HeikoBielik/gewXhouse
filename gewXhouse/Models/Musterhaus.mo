@@ -10,6 +10,7 @@ model Musterhaus "Definition of the house dimensions and orientation"
   parameter Modelica.SIunits.Length height = 2 "Height of the house";
   parameter Modelica.SIunits.Angle pitch = 0.523599 "Roof pitch of the house";
   parameter Modelica.SIunits.Angle north = 0 "Orientation of the house 'north direction'";
+  
   constant Integer N = 6 "number of surfaces";
   Modelica.SIunits.Area sD "Dormer house";
   Real surfacesA[N];
@@ -17,56 +18,46 @@ model Musterhaus "Definition of the house dimensions and orientation"
   parameter Real surfacesNorth[N] = {0, 90, 180, 270, 90, 270};
   Models.Surface floorSurface(pitch = 0, north = 0) "Ground floor";
   //Models.Surface surfaces[N] "north, east, south, west, east roof, west roof";
-  gewXhouse.Models.Solar_model solar_model(surfacesPitch = surfacesPitch, surfacesNorth = surfacesNorth) annotation(
-    Placement(visible = true, transformation(origin = {-60, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Models.Floor floor annotation(
-    Placement(visible = true, transformation(origin = {-20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  
+  gewXhouse.Models.Floor floor annotation(
+    Placement(visible = true, transformation(origin = {-20, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(
-    Placement(visible = true, transformation(origin = {90, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {78, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
-    Placement(visible = true, transformation(origin = {106, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Connectors.Interfaces.HeatFluxInput I annotation(
-    Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {22, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Connectors.Interfaces.HeatFluxInput I annotation(
+    Placement(visible = true, transformation(origin = {-120, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
   output Modelica.Blocks.Interfaces.RealOutput T_inside annotation(
     Placement(visible = true, transformation(origin = {110, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   input Modelica.Blocks.Interfaces.RealInput sunPos[2] annotation(
-    Placement(visible = true, transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-120, 50}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   output Modelica.Blocks.Interfaces.RealOutput posHouse[2] annotation(
     Placement(visible = true, transformation(origin = {-120, -40}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Models.Cover cover annotation(
-    Placement(visible = true, transformation(origin = {60, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  inner Modelica.Blocks.Interfaces.RealOutput totalSurface "total surface" annotation(
-    Placement(visible = true, transformation(origin = {52, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner Modelica.Blocks.Interfaces.RealOutput floorArea "floor area" annotation(
-    Placement(visible = true, transformation(origin = {-28, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Models.Air air annotation(
-    Placement(visible = true, transformation(origin = {20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  inner Modelica.Blocks.Interfaces.RealOutput volumeHouse annotation(
-    Placement(visible = true, transformation(origin = {12, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Real totalSurface "total surface";
+  Real floorArea "floor area";
+  gewXhouse.Models.Air air annotation(
+    Placement(visible = true, transformation(origin = {0, -6}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Real volumeHouse "volume house";
+  gewXhouse.Models.Cover cover annotation(
+    Placement(visible = true, transformation(origin = {-20, 42}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 equation
-  connect(cover.environment, environment) annotation(
-    Line(points = {{74, -20}, {106, -20}}));
-  connect(volumeHouse, air.volumeHouse) annotation(
-    Line(points = {{12, -70}, {12, -70}, {12, -32}, {12, -32}}, color = {0, 0, 127}));
-  connect(air.heatPort, floor.heatPort) annotation(
-    Line(points = {{20, -10}, {20, -10}, {20, 10}, {-20, 10}, {-20, -20}, {-20, -20}}, color = {191, 0, 0}));
-  connect(floor.surface, floorArea) annotation(
-    Line(points = {{-28, -26}, {-28, -70}}, color = {0, 0, 127}));
-  connect(cover.totalSurface, totalSurface) annotation(
-    Line(points = {{52, -26}, {52, -70}}, color = {0, 0, 127}));
-  connect(solar_model.sunPos, sunPos) annotation(
-    Line(points = {{-82, 8}, {-90, 8}, {-90, 40}, {-110, 40}, {-110, 40}, {-120, 40}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(floor.I_Intern, solar_model.I_Intern) annotation(
-    Line(points = {{-28, -14}, {-28, -0.5}, {-38, -0.5}, {-38, 0}}, color = {255, 207, 14}));
-  connect(solar_model.I_glob, I) annotation(
-    Line(points = {{-82, 0}, {-120, 0}}, color = {255, 207, 14}));
-  connect(cover.heatPort, floor.heatPort) annotation(
-    Line(points = {{60, -20}, {60, 10}, {-20, 10}, {-20, -20}}, color = {191, 0, 0}));
-  connect(temperatureSensor.T, T_inside) annotation(
-    Line(points = {{100, 10}, {110, 10}}, color = {0, 0, 127}));
+  connect(air.heatPort, temperatureSensor.port) annotation(
+    Line(points = {{0, 4}, {0, 10}, {68, 10}}, color = {191, 0, 0}));
+  connect(cover.I_Intern, floor.I) annotation(
+    Line(points = {{-28, 36}, {-28, 36}, {-28, -34}, {-28, -34}}, color = {255, 207, 14}));
+  connect(I, cover.I_glob) annotation(
+    Line(points = {{-120, 80}, {-28, 80}, {-28, 48}, {-28, 48}}, color = {255, 207, 14}));
+  connect(sunPos, cover.sunPos) annotation(
+    Line(points = {{-120, 50}, {-38, 50}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(environment, cover.environment) annotation(
+    Line(points = {{22, 42}, {-6, 42}}, color = {191, 0, 0}));
+  connect(cover.heatPort, temperatureSensor.port) annotation(
+    Line(points = {{-20, 44}, {-13, 44}, {-13, 42}, {-20, 42}, {-20, 10}, {68, 10}}, color = {191, 0, 0}));
   connect(floor.heatPort, temperatureSensor.port) annotation(
-    Line(points = {{-20, -20}, {-20, 10}, {80, 10}}, color = {191, 0, 0}));
+    Line(points = {{-20, -40}, {-20, 10}, {68, 10}}, color = {191, 0, 0}));
+  connect(T_inside, temperatureSensor.T) annotation(
+    Line(points = {{110, 10}, {88, 10}, {88, 10}, {88, 10}}, color = {0, 0, 127}));
   floorSurface.A = length * width;
   floorArea = floorSurface.A;
   sD = length * length * tan(pitch) / 4;

@@ -10,18 +10,16 @@ model Solar_model
 
   final constant Real pi = Modelica.Constants.pi;
   parameter Integer N = 6;
-  //input Models.Surface S[N];
   parameter Real surfacesPitch[N];
   parameter Real surfacesNorth[N];
+  
+  Modelica.SIunits.RadiantEnergyFluenceRate I "surface radiation";
+  Modelica.SIunits.RadiantEnergyFluenceRate Ip "positive surface radiation";
 
   input gewXhouse.Connectors.Interfaces.HeatFluxInput  I_glob annotation(
     Placement(visible = true, transformation(extent = {{-140, -20}, {-100, 20}}, rotation = 0), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   input Modelica.Blocks.Interfaces.RealInput sunPos[2] "elevation, azimuth" annotation(
     Placement(visible = true, transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-
-  Modelica.SIunits.RadiantEnergyFluenceRate I "surface radiation";
-  //Modelica.SIunits.HeatFlowRate Q = 0 "J/s";
-  Modelica.SIunits.RadiantEnergyFluenceRate Ip "positive surface radiation";
   output gewXhouse.Connectors.Interfaces.HeatFluxOutput I_Intern annotation(
     Placement(visible = true, transformation(origin = {120, 1.77636e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {110, 3.55271e-15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
