@@ -1,25 +1,19 @@
 within gewXhouse.Examples;
 
 model Testhaus
-  gewXhouse.Models.Sun sun(month = 7)  annotation(
-    Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Musterhaus house(height = 2, length = 3, north = 0, pitch = 0.523599, width = 3) annotation(
-    Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt")  annotation(
-    Placement(visible = true, transformation(origin = {30, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interaction.Show.RealValue realValue annotation(
-    Placement(visible = true, transformation(origin = {46, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Models.Musterhaus musterhaus1 annotation(
+    Placement(visible = true, transformation(origin = {-34, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Models.Sun sun annotation(
+    Placement(visible = true, transformation(origin = {-64, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y = 1000)  annotation(
+    Placement(visible = true, transformation(origin = {-58, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(house.T_inside, realValue.numberPort) annotation(
-    Line(points = {{12, 6}, {16, 6}, {16, 36}, {34.5, 36}}, color = {0, 0, 127}));
-  connect(sun.posHouse, house.posHouse) annotation(
-    Line(points = {{-19, -4}, {-10, -4}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(house.I, sun.I_glob) annotation(
-    Line(points = {{-10, 0}, {-19, 0}}, color = {255, 207, 14}));
-  connect(sun.sunPos, house.sunPos) annotation(
-    Line(points = {{-19, 4}, {-10, 4}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(house.environment, environment.port_a) annotation(
-    Line(points = {{12, 0}, {22, 0}, {22, 0}, {24, 0}}, color = {191, 0, 0}));
+  connect(realExpression1.y, musterhaus1.I) annotation(
+    Line(points = {{-46, -18}, {-44, -18}, {-44, -6}, {-50, -6}, {-50, 2}, {-46, 2}, {-46, 2}}, color = {0, 0, 127}));
+  connect(sun.sunPos, musterhaus1.sunPos) annotation(
+    Line(points = {{-52, 6}, {-46, 6}, {-46, 6}, {-46, 6}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(sun.posHouse, musterhaus1.posHouse) annotation(
+    Line(points = {{-52, -2}, {-46, -2}, {-46, -2}, {-46, -2}, {-46, -2}}, color = {0, 0, 127}, thickness = 0.5));
   annotation(
     Diagram(coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));

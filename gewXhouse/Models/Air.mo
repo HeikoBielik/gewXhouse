@@ -2,23 +2,23 @@ within gewXhouse.Models;
 
 model Air
 
-  parameter Modelica.Blocks.Interfaces.RealInput rho = 1.2 "density" annotation(
-    Placement(visible = true, transformation(origin = {-50, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  parameter Modelica.Blocks.Interfaces.RealInput c_p = 1e3 "specific thermal capacity" annotation(
-    Placement(visible = true, transformation(origin = {-50, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  parameter Modelica.Blocks.Interfaces.RealInput volumeHouse annotation(
-    Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, -56}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
+  parameter Modelica.Blocks.Sources.RealExpression rho (y= 1.2) "air density" annotation(
+    Placement(visible = true, transformation(origin = {-50, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Blocks.Sources.RealExpression c_p (y= 1e3) "specific thermal capacity" annotation(
+    Placement(visible = true, transformation(origin = {-50, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Blocks.Sources.RealExpression v (y= 30) "m3 volume house" annotation(
+    Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
     Placement(visible = true, transformation(extent = {{-10, -80}, {10, -60}}, rotation = 0), iconTransformation(extent = {{-10, 40}, {10, 60}}, rotation = 0)));
   gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
     Placement(visible = true, transformation(origin = {0, -7.10543e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 equation
-  connect(rho, heatCapacitor.rho) annotation(
+  connect(rho.y, heatCapacitor.rho) annotation(
     Line(points = {{-50, -26}, {-32, -26}, {-32, -12}, {-16, -12}, {-16, -12}}, color = {0, 0, 127}));
-  connect(heatCapacitor.c_p, c_p) annotation(
+  connect(heatCapacitor.c_p, c_p.y) annotation(
     Line(points = {{-16, -4}, {-44, -4}, {-44, -4}, {-50, -4}}, color = {0, 0, 127}));
-  connect(volumeHouse, heatCapacitor.volume) annotation(
+  connect(v.y, heatCapacitor.volume) annotation(
     Line(points = {{-50, 20}, {-38, 20}, {-38, 4}, {-16, 4}}, color = {0, 0, 127}));
   connect(heatPort, heatCapacitor.port) annotation(
     Line(points = {{0, -70}, {0, -70}, {0, -20}, {0, -20}}, color = {191, 0, 0}));

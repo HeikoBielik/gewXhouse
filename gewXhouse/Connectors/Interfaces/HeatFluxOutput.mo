@@ -1,6 +1,7 @@
 within gewXhouse.Connectors.Interfaces;
-connector HeatFluxOutput = output Modelica.SIunits.HeatFlux
-  "'output Heat Flux' as connector"                                                       
+connector HeatFluxOutput //= output Modelica.SIunits.HeatFlux
+  extends Modelica.Blocks.Interfaces.RealOutput;
+  //"'output Heat Flux' as connector"                                                 
   annotation (
   defaultComponentName="I",
   Icon(
@@ -32,3 +33,4 @@ connector HeatFluxOutput = output Modelica.SIunits.HeatFlux
 Connector with one output signal of type Real.
 </p>
 </html>"));
+end HeatFluxOutput;

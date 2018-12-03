@@ -1,17 +1,22 @@
 within gewXhouse.Examples;
 
 model ExampleHouse
+  gewXhouse.Models.Musterhaus house annotation(
+    Placement(visible = true, transformation(origin = {-8, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.Sun sun annotation(
-    Placement(visible = true, transformation(origin = {-92, 90}, extent = {{-56, -56}, {56, 56}}, rotation = 0)));
-  gewXhouse.Models.Greenhouse.Greenhouse greenhouse annotation(
-    Placement(visible = true, transformation(origin = {-1, 7}, extent = {{-55, -55}, {55, 55}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-42, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.Environment environment annotation(
-    Placement(visible = true, transformation(origin = {0, 0}, extent = {{-98, -98}, {98, 98}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {18, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
-  connect(environment.environment, greenhouse.environment) annotation(
-    Line(points = {{78, 2}, {44, 2}, {44, 0}}));
-  connect(sun.Radiation, greenhouse.Radiation) annotation(
-    Line(points = {{-37, 59}, {-48, 59}, {-48, 26}}, color = {87, 87, 87}));
-  annotation(
-    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 78.6885));
+  connect(house.posHouse, sun.posHouse) annotation(
+    Line(points = {{-20, -2}, {-31, -2}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(house.I, sun.I_glob) annotation(
+    Line(points = {{-20, 2}, {-31, 2}}, color = {255, 207, 14}));
+  connect(sun.sunPos, house.sunPos) annotation(
+    Line(points = {{-31, 6}, {-20, 6}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(environment.floor, house.environment_floor) annotation(
+    Line(points = {{10, -2}, {6, -2}, {6, -4}, {4, -4}, {4, -4}}, color = {191, 0, 0}));
+  connect(house.environment_air, environment.air) annotation(
+    Line(points = {{4, 2}, {10, 2}, {10, 2}, {10, 2}}, color = {191, 0, 0}));
+
 end ExampleHouse;

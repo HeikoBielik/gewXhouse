@@ -12,14 +12,14 @@ model Sun
   //Modelica.SIunits.Angle azimuth;
   Real delta "declination angle";
   Real n     "day number, such that for n = 1 is January 1st";
-  Real m     "part of the year";
+  Real m     "m part of the year";
   Real omega "hour angle";
   Real alpha "altitude angle";
   Real beta  "the solar azimuth angle";
   Real hour  "actual time";
   Real phi   "time equation";
   Real K;
-  gewXhouse.Connectors.Interfaces.HeatFluxOutput I_glob annotation(
+  output Connectors.Interfaces.HeatFluxOutput I_glob annotation(
     Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   output Modelica.Blocks.Interfaces.RealOutput sunPos[2] annotation(
     Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
