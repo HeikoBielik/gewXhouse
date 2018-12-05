@@ -1,16 +1,16 @@
 within gewXhouse.Models;
 
 model HeatCapacitor "Lumped thermal element storing heat"
-  parameter Modelica.Blocks.Interfaces.RealInput rho = 1014.42 "kg/m3 density" annotation(
+  Modelica.Blocks.Interfaces.RealInput rho " 1014.42 kg/m3 density" annotation(
     Placement(visible = true, transformation(origin = {-90, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Interfaces.RealInput c_p = 840 "specific thermal capacity" annotation(
+  Modelica.Blocks.Interfaces.RealInput c_p " 840 specific thermal capacity" annotation(
     Placement(visible = true, transformation(origin = {-90, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput volume annotation(
     Placement(visible = true, transformation(origin = {-90, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.SIunits.HeatCapacity C "Heat capacity of element (= cp*m)";
-  Modelica.SIunits.Temperature T(start = 293.15, displayUnit = "degC") "Temperature of element";
+  Modelica.SIunits.Temperature T(displayUnit = "degC") "Temperature of element";
   Modelica.SIunits.TemperatureSlope der_T(start = 0) "Time derivative of temperature (= der(T))";
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port(T(start = 293.15)) annotation(
     Placement(transformation(origin = {0, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
 equation
   C = rho * volume * c_p;

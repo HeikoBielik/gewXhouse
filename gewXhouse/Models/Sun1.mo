@@ -1,9 +1,9 @@
 within gewXhouse.Models;
 
-model Sun
+model Sun1
 
   Real lat    "latitude";
-  Real long   "8.7172797 longitude";
+  Real long   "longitude";
   final constant Real pi = Modelica.Constants.pi;
   parameter Real day   = 26;
   parameter Real month = 7;
@@ -19,24 +19,12 @@ model Sun
   Real hour  "actual time";
   Real phi   "time equation";
   Real K;
-  Connectors.Interfaces.HeatFluxOutput I_glob annotation(
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput sunPos[2] "altitude,azimuth" annotation(
-    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput posHouse[2] "long,lat" annotation(
-    Placement(visible = true, transformation(origin = {100, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Real I_glob;
+  Real sunPos[2] "altitude,azimuth";
 equation
-  if cardinality(posHouse[1]) == 0 then
-    long = 8.7172797;
-  else
-    long = posHouse[1];
-  end if;
-  if cardinality(posHouse[2]) == 0 then
-    lat = 48.8785888;
-  else
-    lat  = posHouse[2];
-  end if;
-
+  long = 8.7172797;
+  lat = 48.8785888;
+  
   hour  = time / 60 / 60;
   n     = (month - 1) * 30.3 + day;
 //n     = TimeElapsedFromJanuary1st("26/06_00:00:00");
@@ -58,4 +46,4 @@ annotation(
     defaultComponentName = "sun",
     Icon(graphics = {Text(origin = {0, -50}, lineColor = {190, 0, 0}, extent = {{-180, -28}, {180, -60}}, textString = "%name"), Ellipse(lineColor = {255, 128, 0}, fillColor = {255, 226, 6}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 45, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 90, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 135, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 180, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 225, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 270, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 315, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Polygon(origin = {24, -39}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-54, -3}, {-42, 17}, {-10, 27}, {32, 29}, {54, 9}, {50, -17}, {18, -29}, {-40, -25}, {-54, -3}})}, coordinateSystem(initialScale = 0.1)));
   
-end Sun;
+end Sun1;

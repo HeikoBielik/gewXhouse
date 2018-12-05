@@ -9,7 +9,7 @@ model Air
   parameter Modelica.Blocks.Sources.RealExpression v (y= 30) "m3 volume house" annotation(
     Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(T(start = 293.15)) "Heat port for sensible heat input" annotation(
     Placement(visible = true, transformation(extent = {{-10, -80}, {10, -60}}, rotation = 0), iconTransformation(extent = {{-10, 40}, {10, 60}}, rotation = 0)));
   gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
     Placement(visible = true, transformation(origin = {0, -7.10543e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));

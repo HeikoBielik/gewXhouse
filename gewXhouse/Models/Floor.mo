@@ -11,9 +11,15 @@ model Floor
     Placement(visible = true, transformation(origin = {-22, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Modelica.Blocks.Sources.RealExpression c_p(y=1000) "J/Kg.K specific thermal capacity (1000)" annotation(
     Placement(visible = true, transformation(origin = {-22, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-
-  input gewXhouse.Connectors.Interfaces.HeatFluxInput I "heat flux" annotation(
+  parameter Modelica.Blocks.Sources.RealExpression g(y = 12) annotation(
+    Placement(visible = true, transformation(origin = {-50, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
+  parameter Modelica.SIunits.Temperature T_start=298 annotation(Dialog(tab = "Initialization"));
+  
+public
+  gewXhouse.Connectors.Interfaces.HeatFluxInput I "heat flux" annotation(
     Placement(visible = true, transformation(origin = {-24, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  
   gewXhouse.Models.Radiation radiation annotation(
     Placement(visible = true, transformation(origin = {12, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
@@ -26,7 +32,7 @@ model Floor
     Placement(visible = true, transformation(origin = {28, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Division division annotation(
     Placement(visible = true, transformation(origin = {-16, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(T(start=T_start)) "Heat port for sensible heat input" annotation(
     Placement(visible = true,transformation(extent = {{80, -20}, {100, 0}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
     Placement(visible = true, transformation(extent = {{80, -80}, {100, -60}}, rotation = 0), iconTransformation(extent = {{-50, -40}, {-30, -20}}, rotation = 0)));
@@ -34,11 +40,13 @@ model Floor
     Placement(visible = true, transformation(origin = {62, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Product product2 annotation(
     Placement(visible = true, transformation(origin = {28, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Sources.RealExpression g(y = 12) annotation(
-    Placement(visible = true, transformation(origin = {-50, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Product product3 annotation(
     Placement(visible = true, transformation(origin = {-16, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+
 equation
+  if cardinality(I) == 0 then
+    I = 6000;
+  end if;
   connect(product3.u2, w.y) annotation(
     Line(points = {{-28, -96}, {-70, -96}, {-70, 62}, {-78, 62}, {-78, 62}, {-76, 62}}, color = {0, 0, 127}));
   connect(product3.y, product2.u2) annotation(
@@ -83,6 +91,7 @@ equation
     Line(points = {{-22, 22}, {8, 22}, {8, 28}, {28, 28}}, color = {0, 0, 127}));
   connect(c_p.y, heatCapacitor.c_p) annotation(
     Line(points = {{-22, 36}, {28, 36}}, color = {0, 0, 127}));
+
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, fillColor = {170, 85, 0}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(extent = {{-100, -34}, {120, -94}}, textString = "%name")}),

@@ -1,9 +1,9 @@
 within gewXhouse.Models;
 
 model Musterhaus "Definition of the house dimensions and orientation"
-  parameter Real long = 8.7172797 "latitude" annotation(
+  parameter Real long = 8.7172797 "longitude" annotation(
     Dialog(group = "Position", tab = "Global"));
-  parameter Real lat = 48.8785888 "longitude" annotation(
+  parameter Real lat = 48.8785888 "latitude" annotation(
     Dialog(group = "Position", tab = "Global"));
   parameter Modelica.SIunits.Length length = 3 "Length of the house";
   parameter Modelica.SIunits.Length width = 3 "Width of the house";
@@ -53,18 +53,18 @@ model Musterhaus "Definition of the house dimensions and orientation"
   
   Models.Surface floorSurface(pitch = 0, north = 0) "Ground floor";
   //Models.Surface surfaces[N] "north, east, south, west, east roof, west roof";
-  
+
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(
     Placement(visible = true, transformation(origin = {68, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment_air annotation(
     Placement(visible = true, transformation(origin = {8, 68}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  output Modelica.Blocks.Interfaces.RealOutput T_inside annotation(
+  Modelica.Blocks.Interfaces.RealOutput T_inside annotation(
     Placement(visible = true, transformation(origin = {110, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  input Connectors.Interfaces.HeatFluxInput I annotation(
+  Connectors.Interfaces.HeatFluxInput I annotation(
     Placement(visible = true, transformation(origin = {-120, 70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  input Modelica.Blocks.Interfaces.RealInput sunPos[2] annotation(
+  Modelica.Blocks.Interfaces.RealInput sunPos[2] annotation(
     Placement(visible = true, transformation(origin = {-120, 42}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  output Modelica.Blocks.Interfaces.RealOutput posHouse[2] annotation(
+  Modelica.Blocks.Interfaces.RealOutput posHouse[2] annotation(
     Placement(visible = true, transformation(origin = {-120, -4}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   gewXhouse.Models.Floor floor(s.y = floorArea,w.y=floor_w, c.y=floor_c, rho.y= floor_rho, c_p.y=floor_c_p) annotation(
     Placement(visible = true, transformation(origin = {-20, -14}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
@@ -114,6 +114,7 @@ equation
   
   posHouse[1] = lat;
   posHouse[2] = long;
+  
   annotation(
     Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-33, -63}, extent = {{1, -15}, {-1, 15}}, textString = "L", fontSize = 15), Text(origin = {47, -49}, extent = {{1, -15}, {-1, 15}}, textString = "W", fontSize = 15), Text(origin = {69, -11}, extent = {{1, -15}, {-1, 15}}, textString = "H", fontSize = 15), Line(points = {{20, 0}, {-80, 0}}, color = {135, 135, 135}, pattern = LinePattern.Dash), Ellipse(origin = {20, 0}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 135), Line(points = {{-80, -80}, {20, -80}, {80, -50}, {80, 30}}, color = {255, 0, 0}, thickness = 0.5), Line(points = {{-80, -80}, {-80, 0}, {-30, 50}, {30, 80}, {80, 30}, {20, 0}}, color = {135, 135, 135}), Line(points = {{-30, 50}, {20, 0}, {20, -80}}, color = {135, 135, 135}), Text(origin = {-31, 21}, extent = {{1, -15}, {-1, 15}}, textString = "P", fontSize = 15), Line(origin = {-0.33, 0}, points = {{0, 80}, {-60, 50}}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 5), Text(origin = {-69, 65}, extent = {{1, -15}, {-1, 15}}, textString = "N", fontSize = 15), Ellipse(origin = {0, 80}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 206), Line(origin = {0, -0.33}, points = {{0, 80}, {-80, 80}}, color = {255, 0, 0}, thickness = 0.5), Text(origin = {1, -19}, lineColor = {180, 180, 180}, fillColor = {180, 180, 180}, extent = {{1, -15}, {-1, 15}}, textString = "M", fontSize = 15)}, coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
