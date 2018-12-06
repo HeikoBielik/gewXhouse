@@ -19,15 +19,15 @@ model Cover
   Real elevation;
   Real azimuth;
   
-  Modelica.SIunits.RadiantEnergyFluenceRate I[N] "surface radiation";
-  Modelica.SIunits.RadiantEnergyFluenceRate Ip[N] "positive surface radiation";
+  Modelica.SIunits.RadiantEnergyFluenceRate I "surface radiation";
+  Modelica.SIunits.RadiantEnergyFluenceRate Ip "positive surface radiation";
 
-  Modelica.Blocks.Interfaces.RealInput I_glob annotation(
+  gewXhouse.Connectors.Interfaces.HeatFluxInput  I_glob annotation(
     Placement(visible = true, transformation(extent = {{-140, -100}, {-100, -60}}, rotation = 0), iconTransformation(origin = {-40, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Interfaces.RealInput sunPos[2] "elevation, azimuth" annotation(
     Placement(visible = true, transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput I_Intern annotation(
-    Placement(visible = true, transformation(origin = {100, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  gewXhouse.Connectors.Interfaces.HeatFluxOutput I_Intern annotation(
+    Placement(visible = true, transformation(origin = {120, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
     Placement(visible = true,transformation(extent = {{-10, -20}, {10, 0}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -44,9 +44,9 @@ model Cover
   Modelica.Blocks.Math.Division division annotation(
     Placement(visible = true, transformation(origin = {-12, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-//  if cardinality(I_glob) == 0 then
-//    I_glob = 1000;
-//  end if;
+  if cardinality(I_glob) == 0 then
+    I_glob = 1000;
+  end if;
   if cardinality(sunPos[1]) == 0 then
     elevation = 0;
   else
@@ -83,13 +83,13 @@ equation
     Line(points = {{-30, 66}, {-50, 66}, {-50, 66}, {-54, 66}}, color = {0, 0, 127}));
   connect(heatPort, thermalConductor.port_a) annotation(
     Line(points = {{0, -10}, {40, -10}, {40, -10}, {40, -10}}, color = {191, 0, 0}));
-
+  
 algorithm
   for i in 1:N loop
-    I[i] := I_glob * (cos(surfacesPitch[i]) + cos(abs(azimuth - surfacesNorth[i])) * sin(surfacesPitch[i]) * tan(elevation));
-    Ip[i] := if I[i] < 0 or elevation < 0 or (abs(surfacesPitch[i]-elevation)) > 41 then 0 else I[i];
+    I := I_glob * (cos(surfacesPitch[i]) + cos(abs(azimuth - surfacesNorth[i])) * sin(surfacesPitch[i]) * tan(elevation));
+    Ip := Ip + (if I < 0 or elevation < 0 or (abs(surfacesPitch[i]-elevation)) > 41 then 0 else I);
   end for;
-  I_Intern := sum(Ip);
+  I_Intern := Ip;
   
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),

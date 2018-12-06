@@ -2,17 +2,23 @@ within gewXhouse.Models;
 
 model Radiation
   "Variable temperature boundary condition in Kelvin"
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port(T(start = 293.15)) annotation(
     Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput S "m2 surface"annotation(
     Placement(visible = true, transformation(origin = {-42, 28}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-28, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput I annotation(
+  Connectors.Interfaces.HeatFluxInput I annotation(
     Placement(visible = true, transformation(origin = {-42, -6}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-28, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(
     Placement(visible = true, transformation(origin = {54, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 equation
   connect(prescribedHeatFlow.port, port) annotation(
     Line(points = {{74, 0}, {102, 0}, {102, 0}, {100, 0}}, color = {191, 0, 0}));
+  if cardinality(I) == 0 then
+    I = 1;
+  end if;
+  if cardinality(S) == 0 then
+    S = 1;
+  end if;
   prescribedHeatFlow.Q_flow = -I * S;
 
   annotation (

@@ -1,7 +1,6 @@
 within gewXhouse.Models;
 
 model Floor
-
   parameter Modelica.Blocks.Sources.RealExpression w(y=1) "m floor width (1)" annotation(
     Placement(visible = true, transformation(origin = {-88, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Modelica.Blocks.Sources.RealExpression s(y=9) "m2 surface ground floor (9)" annotation(
@@ -15,7 +14,10 @@ model Floor
   parameter Modelica.Blocks.Sources.RealExpression g(y = 12) annotation(
     Placement(visible = true, transformation(origin = {-50, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
-  Modelica.Blocks.Interfaces.RealInput I "heat flux" annotation(
+  parameter Modelica.SIunits.Temperature T_start=298 annotation(Dialog(tab = "Initialization"));
+  
+public
+  gewXhouse.Connectors.Interfaces.HeatFluxInput I "heat flux" annotation(
     Placement(visible = true, transformation(origin = {-24, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   
   gewXhouse.Models.Radiation radiation annotation(
@@ -30,7 +32,7 @@ model Floor
     Placement(visible = true, transformation(origin = {28, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Division division annotation(
     Placement(visible = true, transformation(origin = {-16, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(T(start=T_start)) "Heat port for sensible heat input" annotation(
     Placement(visible = true,transformation(extent = {{80, -20}, {100, 0}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
     Placement(visible = true, transformation(extent = {{80, -80}, {100, -60}}, rotation = 0), iconTransformation(extent = {{-50, -40}, {-30, -20}}, rotation = 0)));
@@ -40,7 +42,11 @@ model Floor
     Placement(visible = true, transformation(origin = {28, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Product product3 annotation(
     Placement(visible = true, transformation(origin = {-16, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+
 equation
+  if cardinality(I) == 0 then
+    I = 6000;
+  end if;
   connect(product3.u2, w.y) annotation(
     Line(points = {{-28, -96}, {-70, -96}, {-70, 62}, {-78, 62}, {-78, 62}, {-76, 62}}, color = {0, 0, 127}));
   connect(product3.y, product2.u2) annotation(

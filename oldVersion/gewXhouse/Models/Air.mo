@@ -9,7 +9,7 @@ model Air
   parameter Modelica.Blocks.Sources.RealExpression v (y= 30) "m3 volume house" annotation(
     Placement(visible = true, transformation(origin = {-50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port "Heat port for sensible heat input" annotation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(T(start = 293.15)) "Heat port for sensible heat input" annotation(
     Placement(visible = true, transformation(extent = {{-10, -80}, {10, -60}}, rotation = 0), iconTransformation(extent = {{-10, 40}, {10, 60}}, rotation = 0)));
   gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
     Placement(visible = true, transformation(origin = {0, -7.10543e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
@@ -20,7 +20,7 @@ equation
     Line(points = {{-16, -4}, {-44, -4}, {-44, -4}, {-50, -4}}, color = {0, 0, 127}));
   connect(v.y, heatCapacitor.volume) annotation(
     Line(points = {{-50, 20}, {-38, 20}, {-38, 4}, {-16, 4}}, color = {0, 0, 127}));
-  connect(port, heatCapacitor.port) annotation(
+  connect(heatPort, heatCapacitor.port) annotation(
     Line(points = {{0, -70}, {0, -70}, {0, -20}, {0, -20}}, color = {191, 0, 0}));
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),

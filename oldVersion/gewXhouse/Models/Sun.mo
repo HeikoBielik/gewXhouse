@@ -2,29 +2,44 @@ within gewXhouse.Models;
 
 model Sun
 
-  parameter Real lat   = 48.8785888 "latitude";
-  parameter Real long  = 8.7172797 "longitude";
-  parameter Real pi    = 3.141592654;
+  Real lat    "latitude";
+  Real long   "8.7172797 longitude";
+  final constant Real pi = Modelica.Constants.pi;
   parameter Real day   = 26;
-  parameter Real month = 6;
-  
+  parameter Real month = 7;
+  parameter Real cloudy = 0 "Cloudy in % '0 = no cloud'";
+  //Modelica.SIunits.Angle elevation;
+  //Modelica.SIunits.Angle azimuth;
   Real delta "declination angle";
   Real n     "day number, such that for n = 1 is January 1st";
-  Real m     "part of the year";
+  Real m     "m part of the year";
   Real omega "hour angle";
   Real alpha "altitude angle";
   Real beta  "the solar azimuth angle";
   Real hour  "actual time";
   Real phi   "time equation";
   Real K;
-  
-  gewXhouse.Connectors.heat_radiation Radiation annotation(
-    Placement(visible = true, transformation(origin = {68, -38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {99, -55}, extent = {{-53, -53}, {53, 53}}, rotation = 0)));
-
+  Connectors.Interfaces.HeatFluxOutput I_glob annotation(
+    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealOutput sunPos[2] "altitude,azimuth" annotation(
+    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealInput posHouse[2] "long,lat" annotation(
+    Placement(visible = true, transformation(origin = {100, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
+  if cardinality(posHouse[1]) == 0 then
+    long = 8.7172797;
+  else
+    long = posHouse[1];
+  end if;
+  if cardinality(posHouse[2]) == 0 then
+    lat = 48.8785888;
+  else
+    lat  = posHouse[2];
+  end if;
 
   hour  = time / 60 / 60;
   n     = (month - 1) * 30.3 + day;
+//n     = TimeElapsedFromJanuary1st("26/06_00:00:00");
   K     = pi / 180;
   m     = (n - 1 + (hour - 12) / 24) / 365;
   delta = (0.006918 - 0.399912 * cos(2 * pi * m) + 0.070257 * sin(2 * pi * m) - 0.006758 * cos(4 * pi * m) + 0.000907 * sin(4 * pi * m) - 0.002697 * cos(6 * pi * m) + 0.00148 * sin(6 * pi * m)) / K;
@@ -34,12 +49,13 @@ equation
   beta  = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
   
   
-  Radiation.elevation = asin(alpha) / K;
-  Radiation.azimuth   = if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
-  Radiation.I_dir     = (-1) * 3000 + 5000 * sin(0.000035 * time);
-
+  I_glob    = (-1) * 3000 + 5000 * sin(0.000035 * time) * (1- (cloudy/100));
+algorithm
+  sunPos[1] := asin(alpha) / K;
+  sunPos[2] := if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
 
 annotation(
-      Icon(graphics = {Ellipse(lineColor = {255, 170, 0}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(origin = {0, 64.67}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {0.754717, -64.9998}, points = {{0, -15}, {0, 15}}, color = {255, 170, 0}, thickness = 3), Line(origin = {52.0283, -16.6979}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-77.9717, -17.9243}, points = {{28, 17}, {-2, 17}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.9717, 22.1229}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.8585, -74.8582}, points = {{30, 15}, {8, 37}}, color = {255, 170, 0}, thickness = 3), Line(origin = {29.6227, 44.7644}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3), Line(origin = {-67.3584, -52.8771}, points = {{30, 15}, {8, -7}}, color = {255, 170, 0}, thickness = 3)}));
+    defaultComponentName = "sun",
+    Icon(graphics = {Text(origin = {0, -50}, lineColor = {190, 0, 0}, extent = {{-180, -28}, {180, -60}}, textString = "%name"), Ellipse(lineColor = {255, 128, 0}, fillColor = {255, 226, 6}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 45, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 90, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 135, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 180, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 225, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 270, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 315, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Polygon(origin = {24, -39}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-54, -3}, {-42, 17}, {-10, 27}, {32, 29}, {54, 9}, {50, -17}, {18, -29}, {-40, -25}, {-54, -3}})}, coordinateSystem(initialScale = 0.1)));
   
 end Sun;

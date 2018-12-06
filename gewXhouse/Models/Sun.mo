@@ -2,7 +2,7 @@ within gewXhouse.Models;
 
 model Sun
 
-  Real lat    "latitude";
+  Real lat    "48.8785888 latitude";
   Real long   "8.7172797 longitude";
   final constant Real pi = Modelica.Constants.pi;
   parameter Real day   = 26;
@@ -19,12 +19,13 @@ model Sun
   Real hour  "actual time";
   Real phi   "time equation";
   Real K;
-  Connectors.Interfaces.HeatFluxOutput I_glob annotation(
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  //Real I;
+  Modelica.Blocks.Interfaces.RealOutput I_glob annotation(
+    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput sunPos[2] "altitude,azimuth" annotation(
-    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput posHouse[2] "long,lat" annotation(
-    Placement(visible = true, transformation(origin = {100, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {100, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
   if cardinality(posHouse[1]) == 0 then
     long = 8.7172797;
@@ -48,8 +49,8 @@ equation
   alpha = sin(K * lat) * sin(K * delta) + cos(K * lat) * cos(K * delta) * cos(K * omega);
   beta  = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
   
-  
-  I_glob    = (-1) * 3000 + 5000 * sin(0.000035 * time) * (1- (cloudy/100));
+  I_glob = (-1) * 3000 + 5000 * sin(0.000035 * time) * (1- (cloudy/100));
+  //I_glob = if I<0 then 0 else I;
 algorithm
   sunPos[1] := asin(alpha) / K;
   sunPos[2] := if der(beta) < 0 then acos(beta) / K else 360 - acos(beta) / K;
@@ -57,5 +58,4 @@ algorithm
 annotation(
     defaultComponentName = "sun",
     Icon(graphics = {Text(origin = {0, -50}, lineColor = {190, 0, 0}, extent = {{-180, -28}, {180, -60}}, textString = "%name"), Ellipse(lineColor = {255, 128, 0}, fillColor = {255, 226, 6}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 45, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 90, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 135, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 180, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 225, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 270, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 315, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Polygon(origin = {24, -39}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-54, -3}, {-42, 17}, {-10, 27}, {32, 29}, {54, 9}, {50, -17}, {18, -29}, {-40, -25}, {-54, -3}})}, coordinateSystem(initialScale = 0.1)));
-  
 end Sun;
