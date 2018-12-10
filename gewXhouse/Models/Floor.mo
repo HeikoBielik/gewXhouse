@@ -88,5 +88,34 @@ equation
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, fillColor = {170, 85, 0}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(extent = {{-100, -34}, {120, -94}}, textString = "%name")}),
-  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
+  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
+  Documentation(info = "<html><head></head><body><p><b>FLOOR MODEL</b></p><p>The floor model is an important part of the greenhouse model. The short wave radiation from the sun, which will be transfered to the cover to the floor turns into long wave radiation in the flloor. The floor is the main \"capacity\" in the greenhouse. If the temperature in the greenhouse is higher than in the floor, the floors save energy and the other way round. The user has the possiblity to enter different materials with the material specific variables: heat transfer coeffizient, density and specific thermal capacity. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model. All needed paramters will transport automatically and the user does not have to connect the components in the floor. In the floor are interacting following modelica- standard components:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.HeatCapacitor\">heat capacitor</a></li><li><a href=\"modelica://gewXhouse.Models.Radiation\">radiation</a></li><li><a href=\"modelica://gewXhouse.Models.ThermalConductor\" style=\"font-size: 12px;\">thermal conductor</a></li></ul><br><p>&nbsp;</p>
+<p>Overview of house input/output&nbsp;</p>
+<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
+<tbody>
+<tr style=\"height: 39px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
+<td style=\"width: 198.917px; height: 39px; text-align: center;\"><strong>Variable</strong></td>
+<td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
+</tr>
+<tr style=\"height: 69px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
+<td style=\"width: 198.917px; height: 69px; text-align: center;\">I</td>
+<td style=\"width: 271.95px; height: 69px; text-align: center;\">Radiation from the sun will be transfered to other components in the greenhouse with the correct physical calculation</td>
+</tr>
+<tr style=\"height: 45px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 45px;\"><strong>Equations</strong></td>
+<td style=\"width: 198.917px; height: 45px;\">&nbsp;ja / nein? ich würde sagen nein!</td>
+<td style=\"width: 271.95px; height: 45px;\">&nbsp;</td>
+</tr>
+<tr style=\"height: 33.7167px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
+<td style=\"width: 198.917px; height: 33.7167px;\">
+<p style=\"text-align: center;\">heat Port</p>
+</td>
+<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">The heat port transfers the Q_flow inner the greenhouse</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p></body></html>"));
 end Floor;

@@ -18,58 +18,51 @@ equation
   der_T = der(T);
   C * der(T) = port.Q_flow;
   annotation(
+    Placement(visible = true, transformation(origin = {-90, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)),
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 110}, {150, 70}}, textString = "%name", lineColor = {0, 0, 255}), Polygon(points = {{0, 67}, {-20, 63}, {-40, 57}, {-52, 43}, {-58, 35}, {-68, 25}, {-72, 13}, {-76, -1}, {-78, -15}, {-76, -31}, {-76, -43}, {-76, -53}, {-70, -65}, {-64, -73}, {-48, -77}, {-30, -83}, {-18, -83}, {-2, -85}, {8, -89}, {22, -89}, {32, -87}, {42, -81}, {54, -75}, {56, -73}, {66, -61}, {68, -53}, {70, -51}, {72, -35}, {76, -21}, {78, -13}, {78, 3}, {74, 15}, {66, 25}, {54, 33}, {44, 41}, {36, 57}, {26, 65}, {0, 67}}, lineColor = {160, 160, 164}, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid), Polygon(points = {{-58, 35}, {-68, 25}, {-72, 13}, {-76, -1}, {-78, -15}, {-76, -31}, {-76, -43}, {-76, -53}, {-70, -65}, {-64, -73}, {-48, -77}, {-30, -83}, {-18, -83}, {-2, -85}, {8, -89}, {22, -89}, {32, -87}, {42, -81}, {54, -75}, {42, -77}, {40, -77}, {30, -79}, {20, -81}, {18, -81}, {10, -81}, {2, -77}, {-12, -73}, {-22, -73}, {-30, -71}, {-40, -65}, {-50, -55}, {-56, -43}, {-58, -35}, {-58, -25}, {-60, -13}, {-60, -5}, {-60, 7}, {-58, 17}, {-56, 19}, {-52, 27}, {-48, 35}, {-44, 45}, {-40, 57}, {-58, 35}}, lineColor = {0, 0, 0}, fillColor = {160, 160, 164}, fillPattern = FillPattern.Solid), Text(extent = {{-69, 7}, {71, -24}}, lineColor = {0, 0, 0}, textString = "%C")}),
     Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Polygon(points = {{0, 67}, {-20, 63}, {-40, 57}, {-52, 43}, {-58, 35}, {-68, 25}, {-72, 13}, {-76, -1}, {-78, -15}, {-76, -31}, {-76, -43}, {-76, -53}, {-70, -65}, {-64, -73}, {-48, -77}, {-30, -83}, {-18, -83}, {-2, -85}, {8, -89}, {22, -89}, {32, -87}, {42, -81}, {54, -75}, {56, -73}, {66, -61}, {68, -53}, {70, -51}, {72, -35}, {76, -21}, {78, -13}, {78, 3}, {74, 15}, {66, 25}, {54, 33}, {44, 41}, {36, 57}, {26, 65}, {0, 67}}, lineColor = {160, 160, 164}, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid), Polygon(points = {{-58, 35}, {-68, 25}, {-72, 13}, {-76, -1}, {-78, -15}, {-76, -31}, {-76, -43}, {-76, -53}, {-70, -65}, {-64, -73}, {-48, -77}, {-30, -83}, {-18, -83}, {-2, -85}, {8, -89}, {22, -89}, {32, -87}, {42, -81}, {54, -75}, {42, -77}, {40, -77}, {30, -79}, {20, -81}, {18, -81}, {10, -81}, {2, -77}, {-12, -73}, {-22, -73}, {-30, -71}, {-40, -65}, {-50, -55}, {-56, -43}, {-58, -35}, {-58, -25}, {-60, -13}, {-60, -5}, {-60, 7}, {-58, 17}, {-56, 19}, {-52, 27}, {-48, 35}, {-44, 45}, {-40, 57}, {-58, 35}}, lineColor = {0, 0, 0}, fillColor = {160, 160, 164}, fillPattern = FillPattern.Solid), Ellipse(extent = {{-6, -1}, {6, -12}}, lineColor = {255, 0, 0}, fillColor = {191, 0, 0}, fillPattern = FillPattern.Solid), Text(extent = {{11, 13}, {50, -25}}, lineColor = {0, 0, 0}, textString = "T"), Line(points = {{0, -12}, {0, -96}}, color = {255, 0, 0})}),
-    Documentation(info = "<html>
-<p>
+    Documentation(info = "<html><head></head><body><p>
 This is a generic model for the heat capacity of a material.
 No specific geometry is assumed beyond a total volume with
-uniform temperature for the entire volume.
-Furthermore, it is assumed that the heat capacity
-is constant (independent of temperature).
-</p>
-<p>
-The temperature T [Kelvin] of this component is a <b>state</b>.
-A default of T = 25 degree Celsius (= SIunits.Conversions.from_degC(25))
-is used as start value for initialization.
-This usually means that at start of integration the temperature of this
-component is 25 degrees Celsius. You may, of course, define a different
-temperature as start value for initialization. Alternatively, it is possible
-to set parameter <b>steadyStateStart</b> to <b>true</b>. In this case
-the additional equation '<b>der</b>(T) = 0' is used during
-initialization, i.e., the temperature T is computed in such a way that
-the component starts in <b>steady state</b>. This is useful in cases,
-where one would like to start simulation in a suitable operating
-point without being forced to integrate for a long time to arrive
-at this point.
-</p>
-<p>
-Note, that parameter <b>steadyStateStart</b> is not available in
-the parameter menu of the simulation window, because its value
-is utilized during translation to generate quite different
-equations depending on its setting. Therefore, the value of this
-parameter can only be changed before translating the model.
-</p>
-<p>
-This component may be used for complicated geometries where
+uniform temperature for the entire volume.</p>
+<p>This component may be used for complicated geometries where
 the heat capacity C is determined my measurements. If the component
-consists mainly of one type of material, the <b>mass m</b> of the
+consists mainly of one type of material, the <b>volume and density&nbsp;</b>of the
 component may be measured or calculated and multiplied with the
 <b>specific heat capacity cp</b> of the component material to
-compute C:
-</p>
-<pre>
-C = cp*m.
-Typical values for cp at 20 degC in J/(kg.K):
-  aluminium   896
-  concrete    840
-  copper      383
-  iron        452
-  silver      235
-  steel       420 ... 500 (V2A)
-  wood       2500
-</pre>
-</html>"));
-  annotation(
-    Placement(visible = true, transformation(origin = {-90, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+compute C:</p>
+
+
+<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
+<tbody>
+<tr style=\"height: 39px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
+<td style=\"width: 198.917px; height: 39px; text-align: center;\"><strong>Variable</strong></td>
+<td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
+</tr>
+<tr style=\"height: 38px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 100px;\" rowspan=\"3\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
+<td style=\"width: 198.917px; height: 38px; text-align: center;\">Volume</td>
+<td style=\"width: 271.95px; height: 38px; text-align: center;\">Volume of the house</td>
+</tr>
+<tr style=\"height: 29px;\">
+<td style=\"width: 198.917px; height: 29px; text-align: center;\">rho</td>
+<td style=\"width: 271.95px; height: 29px; text-align: center;\">specific denisity</td>
+</tr>
+<tr style=\"height: 33px;\">
+<td style=\"width: 198.917px; height: 33px; text-align: center;\">c_p</td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">specific thermal capacity of the floor</td>
+</tr>
+<tr style=\"height: 33px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 33px;\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
+<td style=\"width: 198.917px; height: 33px;\">
+<p style=\"text-align: center;\">heat Port</p>
+</td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">The heat port transfers the Q_flow inner the greenhouse</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+</body></html>"));
 end HeatCapacitor;

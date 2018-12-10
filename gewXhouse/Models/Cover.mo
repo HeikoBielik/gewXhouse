@@ -25,10 +25,8 @@ model Cover
   Real azimuth;
   
   Real K;
-  
-//  Modelica.SIunits.RadiantEnergyFluenceRate I[N] "surface radiation";
-//  Modelica.SIunits.RadiantEnergyFluenceRate Ip[N] "positive surface radiation";
-
+  //  Modelica.SIunits.RadiantEnergyFluenceRate I[N] "surface radiation";
+  //  Modelica.SIunits.RadiantEnergyFluenceRate Ip[N] "positive surface radiation";
   Modelica.Blocks.Interfaces.RealInput I_glob annotation(
     Placement(visible = true, transformation(extent = {{-140, -100}, {-100, -60}}, rotation = 0), iconTransformation(origin = {-40, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Interfaces.RealInput sunPos[2] "elevation, azimuth" annotation(
@@ -118,9 +116,40 @@ equation
 //    Ip[i] = if I[i] < 0 or elevation * K < 0 or abs(sPitch[i] * K - elevation * K) > 41 then 0 else I[i];
 //  end for;
 //  I_Intern = sum(Ip);
-  
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
-  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731));
+  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
+  Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the cover of the greenhouse model. The user is able to adapt his own cover-parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model:&nbsp;</p><p></p><ul><li>width of the cover</li><li>specific thermal capacity</li><li>density</li><li>thermal transmittance, lambda [W/m²k]</li></ul><div>In addiotion the cover models receives from the&nbsp;<a href=\"modelica://gewXhouse.Models.Sun\" style=\"font-size: 12px;\">sun</a>&nbsp;the azimuth and elevation, which is needed for running the model and returns the I_Intern which influences the inner temperature of the greenhouse.&nbsp;</div><p>Overview of cover input/output&nbsp;</p>
+
+
+<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
+<tbody>
+<tr style=\"height: 39px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
+<td style=\"width: 198.917px; height: 39px; text-align: center;\"><strong>Variable</strong></td>
+<td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
+</tr>
+<tr style=\"height: 30.8px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 30.8px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
+<td style=\"width: 198.917px; height: 30.8px; text-align: center;\">sunPos[]</td>
+<td style=\"width: 271.95px; height: 30.8px; text-align: center;\">azimuth and elevantion of the sun</td>
+</tr>
+<tr style=\"height: 30.8px;\">
+<td style=\"width: 198.917px; height: 30.8px; text-align: center;\">I_glob</td>
+<td style=\"width: 271.95px; height: 30.8px; text-align: center;\">direct solar radiation</td>
+</tr>
+<tr style=\"height: 33px;\">
+<td style=\"width: 79.1333px; text-align: center; height: 66px;\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
+<td style=\"width: 198.917px; height: 33px;\">
+<p style=\"text-align: center;\">I_Intern</p>
+</td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">transfers the passing solar radiation to the inner components of the greenhouse via thermal conductor </td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+
+<p>&nbsp;</p></body></html>"));
 end Cover;
