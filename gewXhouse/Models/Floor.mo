@@ -41,14 +41,14 @@ model Floor
   Modelica.Blocks.Math.Product product3 annotation(
     Placement(visible = true, transformation(origin = {-16, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(product2.u1, c.y) annotation(
+    Line(points = {{16, -78}, {6, -78}, {6, -34}, {-4, -34}, {-4, -34}}, color = {0, 0, 127}));
   connect(product3.u2, w.y) annotation(
     Line(points = {{-28, -96}, {-70, -96}, {-70, 62}, {-78, 62}, {-78, 62}, {-76, 62}}, color = {0, 0, 127}));
   connect(product3.y, product2.u2) annotation(
     Line(points = {{-4, -90}, {16, -90}, {16, -90}, {16, -90}}, color = {0, 0, 127}));
   connect(g.y, product3.u1) annotation(
     Line(points = {{-38, -84}, {-30, -84}, {-30, -84}, {-28, -84}}, color = {0, 0, 127}));
-  connect(product2.u1, c.y) annotation(
-    Line(points = {{16, -78}, {8, -78}, {8, -34}, {-4, -34}, {-4, -34}}, color = {0, 0, 127}));
   connect(product2.y, thermalConductor1.G) annotation(
     Line(points = {{39, -84}, {62, -84}, {62, -78}}, color = {0, 0, 127}));
   connect(division.y, product1.u2) annotation(
@@ -85,7 +85,6 @@ equation
     Line(points = {{-22, 22}, {8, 22}, {8, 28}, {28, 28}}, color = {0, 0, 127}));
   connect(c_p.y, heatCapacitor.c_p) annotation(
     Line(points = {{-22, 36}, {28, 36}}, color = {0, 0, 127}));
-
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, fillColor = {170, 85, 0}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(extent = {{-100, -34}, {120, -94}}, textString = "%name")}),

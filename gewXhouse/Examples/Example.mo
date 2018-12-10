@@ -10,8 +10,6 @@ model Example
   gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt")  annotation(
     Placement(visible = true, transformation(origin = {56, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
 equation
-  connect(environment.floor, house.port_b) annotation(
-    Line(points = {{42, 16}, {22, 16}}, color = {191, 0, 0}));
   connect(house.out, environment.air) annotation(
     Line(points = {{22, 24}, {42, 24}}, color = {191, 0, 0}));
   connect(realValue1.numberPort, house.t_inside) annotation(

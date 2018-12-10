@@ -1,0 +1,8 @@
+within gewXhouse.Models;
+
+class Surface
+  parameter Real pitch = 0;
+  parameter Real north = 0;
+  parameter Real a = 0;
+
+end Surface;

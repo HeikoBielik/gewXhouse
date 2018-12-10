@@ -1,0 +1,8 @@
+within gewXhouse.Models;
+
+class Surface1
+  final parameter Integer N = 6;
+  parameter Real pitch[N];
+  parameter Real north[N];
+  parameter Real a[N];
+end Surface1;
