@@ -3,7 +3,7 @@ within gewXhouse.Examples;
 model Example
   gewXhouse.Models.Sun sun annotation(
     Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  gewXhouse.Models.House house(floor_c = 4, floor_r_v = 1, floor_w = 1, venti_on_off = true) annotation(
+  gewXhouse.Models.Iglu house(floor_c = 4, floor_r_v = 1, floor_w = 1, venti_on_off = true) annotation(
     Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interaction.Show.RealValue innerTemperature annotation(
     Placement(visible = true, transformation(origin = {50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

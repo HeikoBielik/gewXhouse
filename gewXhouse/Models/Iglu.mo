@@ -1,15 +1,11 @@
 within gewXhouse.Models;
 
-model House
+model Iglu
   parameter Real long = 8.7172797 "longitude" annotation(
     Dialog(group = "Position", tab = "Global"));
   parameter Real lat = 48.8785888 "latitude" annotation(
     Dialog(group = "Position", tab = "Global"));
-  parameter Modelica.SIunits.Length length = 3 "Length of the house";
-  parameter Modelica.SIunits.Length width = 3 "Width of the house";
-  parameter Modelica.SIunits.Length height = 2 "Height of the house";
-  parameter Modelica.SIunits.Angle pitch = 0.523599 "Roof pitch of the house";
-  parameter Modelica.SIunits.Angle north = 0 "Orientation of the house 'north direction'";
+  parameter Modelica.SIunits.Length diameter = 3 "Diameter of the house";
   
   parameter Real cover_rho = 2600 "kg/m3 density" annotation(
     Dialog(group = "Parameter", tab = "Cover")); 
@@ -53,15 +49,11 @@ model House
   parameter Boolean venti_on_off = false "Ventilation Switch On/Off" annotation(
     Dialog(group = "Parameter", tab = "Ventilation")); 
     
-  constant Integer N = 6 "number of surfaces";
-  parameter Real sPitch[N] = {90, 90, 90, 90, pitch, pitch};
-  parameter Real sNorth[N] = {0, 90, 180, 270, 90, 270};
-  Real sA[N];
-  
+  final constant Real pi = Modelica.Constants.pi;
+     
   Real sTotal "total surface";
   Real sAFloor "floor area";
   Real vTotal "volume house";
-  Real sADormer "Dormer house area";
   Real cTotal "house circumference";
   //Models.Surface floorSurface(pitch = 0, north = 0) "Ground floor";
   //Surface1 surface "north, east, south, west, east roof, west roof";
@@ -113,20 +105,13 @@ equation
   connect(I, cover.I_glob) annotation(
     Line(points = {{-120, 80}, {-28, 80}, {-28, 46}, {-28, 46}}, color = {0, 0, 127}));
 
-  sAFloor = length * width;
-  sADormer = length * length * tan(pitch) / 4;
-  sA[1] = length * height + sADormer;
-  sA[2] = width * height;
-  sA[3] = sA[1];
-  sA[4] = sA[2];
-  sA[5] = length / 2 / cos(pitch) * width;
-  sA[6] = sA[5];
-  sTotal = (sA[1] + sA[2] + sA[5]) * 2;
-  vTotal = sA[1] * width;
-  cTotal = (length + width) * 2;
+  sAFloor = pi*(diameter/2)^2;
+  sTotal = (pi*diameter^2)/2;
+  vTotal = pi*(diameter^3)/12;
+  cTotal = pi*diameter;
   
-  annotation(
-    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-33, -63}, extent = {{1, -15}, {-1, 15}}, textString = "L", fontSize = 15), Text(origin = {47, -49}, extent = {{1, -15}, {-1, 15}}, textString = "W", fontSize = 15), Text(origin = {69, -11}, extent = {{1, -15}, {-1, 15}}, textString = "H", fontSize = 15), Line(points = {{20, 0}, {-80, 0}}, color = {135, 135, 135}, pattern = LinePattern.Dash), Ellipse(origin = {20, 0}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 135), Line(points = {{-80, -80}, {20, -80}, {80, -50}, {80, 30}}, color = {255, 0, 0}, thickness = 0.5), Line(points = {{-80, -80}, {-80, 0}, {-30, 50}, {30, 80}, {80, 30}, {20, 0}}, color = {135, 135, 135}), Line(points = {{-30, 50}, {20, 0}, {20, -80}}, color = {135, 135, 135}), Text(origin = {-31, 21}, extent = {{1, -15}, {-1, 15}}, textString = "P", fontSize = 15), Line(origin = {-0.33, 0}, points = {{0, 80}, {-60, 50}}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 5), Text(origin = {-69, 65}, extent = {{1, -15}, {-1, 15}}, textString = "N", fontSize = 15), Ellipse(origin = {0, 80}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 206), Line(origin = {0, -0.33}, points = {{0, 80}, {-80, 80}}, color = {255, 0, 0}, thickness = 0.5)}, coordinateSystem(initialScale = 0.1)),
+    annotation(
+    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}),Polygon(origin = {-3, -8}, fillColor = {223, 223, 223}, fillPattern = FillPattern.Solid, lineThickness = 0.5, points = {{-77, 18}, {-85, -22}, {-75, -48}, {-39, -68}, {13, -70}, {59, -60}, {85, -38}, {83, 4}, {61, 42}, {31, 64}, {3, 70}, {-31, 64}, {-57, 48}, {-57, 48}, {-77, 18}}), Line(origin = {-2.98, -44.01}, points = {{-85.0211, 14.0059}, {-73.0211, 34.0059}, {-75.0211, -11.9941}, {-55.0211, 8.00593}, {-39.0211, -31.9941}, {-13.0211, 8.00593}, {12.9789, -33.9941}, {38.9789, 10.0059}, {58.9789, -23.9941}, {70.9789, 18.0059}, {84.9789, -1.99407}}, thickness = 0.5), Line(origin = {0.2, -3.26}, points = {{79.7986, -0.739192}, {67.7986, -22.7392}, {35.7986, -30.7392}, {-16.2014, -32.7392}, {-58.2014, -32.7392}, {-76.2014, -6.73919}, {-80.2014, 13.2608}, {-60.2014, 35.2608}, {-76.2014, -6.73919}, {-44.2014, 9.26081}, {-58.2014, -32.7392}, {-58.2014, -32.7392}}, thickness = 0.5), Line(origin = {2.12, 2.22}, points = {{-62.1156, 37.7774}, {-62.1156, 29.7774}, {-46.1156, 3.77735}, {-18.1156, -38.2226}, {3.88442, 9.7774}, {33.8844, -36.2226}, {51.8844, 7.77735}, {65.8844, -28.2226}}, thickness = 0.5), Line(origin = {10.32, 29.75}, points = {{69.6756, -33.7476}, {43.6756, -19.7476}, {-4.32437, -17.7476}, {-54.3244, -23.7476}, {-30.3244, 14.2524}, {-70.3244, 2.25241}, {-44.3244, 26.2524}, {-30.3244, 14.2524}, {-10.3244, 32.2524}, {15.6756, 14.2524}, {17.6756, 26.2524}}, thickness = 0.5), Line(origin = {19.14, 27.18}, points = {{6.86036, 16.8179}, {-39.1396, 16.8179}, {-13.1396, -15.1821}, {6.86036, 16.8179}, {34.8604, -17.1821}, {38.8604, 6.81785}, {6.86036, 16.8179}}, thickness = 0.5), Text(origin = {-9, 80}, extent = {{47, -12}, {-47, 12}}, textString = "3V 4/9")}, coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
   Documentation(info = "<html><head></head><body><p><b>HOUSE MODEL</b></p><p>The house model simulates a simplified interior from a greenhouse. The solar radioation, azimuth and elevation of the sun are necessary for calculating the inner temperature of the greenhouse. The user is able to adjust the greenhouse with ow parameters (length, width, height, orientation to the north, pitch). In the house are interacting different components e.g.:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of house input/output&nbsp;</p>
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
@@ -156,4 +141,4 @@ equation
 </tbody>
 </table>
 <p>&nbsp;</p></body></html>"));
-end House;
+end Iglu;

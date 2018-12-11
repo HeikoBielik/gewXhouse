@@ -19,10 +19,10 @@ model Cover
   
   final constant Real pi = Modelica.Constants.pi;
   
-  parameter Integer N = 6;
+  /*parameter Integer N = 6;
   parameter Real sPitch[N] = {0,0,0,0,0,0};
   parameter Real sNorth[N] = {0,0,0,0,0,0};
-  input Real sA[N];
+  input Real sA[N];*/
 
   Real elevation;
   Real azimuth;
