@@ -1,6 +1,6 @@
-within gewXhouse.Examples;
+within gewXhouse.Models;
 
-model ModelTest
+model Glass
   gewXhouse.Models.ThermalConductor glass1 annotation(
     Placement(visible = true, transformation(origin = {0, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression l_glass(y = 0.76) annotation(
@@ -62,5 +62,5 @@ equation
     Line(points = {{-4, -40}, {0, -40}, {0, -18}, {0, -18}}, color = {0, 0, 127}));
   annotation(
     experiment(StartTime = 0, StopTime = 7200, Tolerance = 1e-06, Interval = 14.4),
-    Icon(graphics = {Rectangle(origin = {-21, 0}, fillColor = {170, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-19, 80}, {61, -80}}), Rectangle(fillColor = {232, 255, 228}, fillPattern = FillPattern.Solid, extent = {{-20, 80}, {20, -80}}), Line(origin = {-3, 0}, points = {{-77, 0}, {83, 0}}, color = {170, 0, 0}, thickness = 0.5, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 10)}));
-end ModelTest;
+    Icon(graphics = {Rectangle(origin = {-21, 0}, fillColor = {170, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-19, 80}, {61, -80}}), Rectangle(fillColor = {232, 255, 228}, fillPattern = FillPattern.Solid, extent = {{-20, 80}, {20, -80}}), Line(origin = {-3, 0}, points = {{-77, 0}, {83, 0}}, color = {170, 0, 0}, thickness = 0.5, arrow = {Arrow.Filled, Arrow.Filled}, arrowSize = 10)}, coordinateSystem(initialScale = 0.1)));
+end Glass;

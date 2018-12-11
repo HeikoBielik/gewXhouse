@@ -13,7 +13,7 @@ model Environment
   //  environment.T := toKelvin.Kelvin;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a floor annotation(
     Placement(visible = true, transformation(origin = {50, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Celsius.FixedTemperature fixedTemperature(T = 40) annotation(
+  Modelica.Thermal.HeatTransfer.Celsius.FixedTemperature fixedTemperature(T = 21) annotation(
     Placement(visible = true, transformation(origin = {0, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(fixedTemperature.port, floor) annotation(

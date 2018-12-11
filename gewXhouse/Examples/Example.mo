@@ -3,17 +3,19 @@ within gewXhouse.Examples;
 model Example
   gewXhouse.Models.Sun sun annotation(
     Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  gewXhouse.Models.House house annotation(
+  gewXhouse.Models.House house(floor_c = 4, floor_r_v = 1, floor_w = 1, venti_on_off = true) annotation(
     Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Blocks.Interaction.Show.RealValue realValue1 annotation(
-    Placement(visible = true, transformation(origin = {50, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt")  annotation(
+  Modelica.Blocks.Interaction.Show.RealValue innerTemperature annotation(
+    Placement(visible = true, transformation(origin = {50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt") annotation(
     Placement(visible = true, transformation(origin = {56, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
 equation
+  connect(innerTemperature.numberPort, house.t_inside) annotation(
+    Line(points = {{38.5, 50}, {30.25, 50}, {30.25, 36}, {22, 36}}, color = {0, 0, 127}));
+  connect(house.port_b, environment.floor) annotation(
+    Line(points = {{22, 16}, {42, 16}}, color = {191, 0, 0}));
   connect(house.out, environment.air) annotation(
     Line(points = {{22, 24}, {42, 24}}, color = {191, 0, 0}));
-  connect(realValue1.numberPort, house.t_inside) annotation(
-    Line(points = {{38.5, 36}, {22, 36}}, color = {0, 0, 127}));
   connect(house.pos, sun.posHouse) annotation(
     Line(points = {{-22, 20}, {-38, 20}}, color = {0, 0, 127}, thickness = 0.5));
   connect(house.SunPos, sun.sunPos) annotation(

@@ -13,7 +13,7 @@ model Radiation
 equation
   connect(prescribedHeatFlow.port, port) annotation(
     Line(points = {{74, 0}, {102, 0}, {102, 0}, {100, 0}}, color = {191, 0, 0}));
-  prescribedHeatFlow.Q_flow = -I * S;
+  prescribedHeatFlow.Q_flow = I * S;
 
   annotation (
     Icon(coordinateSystem(initialScale = 0.1), graphics={Rectangle(fillColor = {159, 159, 223}, pattern = LinePattern.None, fillPattern = FillPattern.Backward, extent = {{-8, 100}, {100, -100}}), Line(points = {{-10, 0}, {64, 0}}, color = {191, 0, 0}, thickness = 0.5), Text(lineColor = {0, 0, 255}, extent = {{-150, 150}, {150, 110}}, textString = "%name"), Polygon(lineColor = {191, 0, 0}, fillColor = {191, 0, 0}, fillPattern = FillPattern.Solid, points = {{50, -20}, {50, 20}, {90, 0}, {50, -20}})}),
