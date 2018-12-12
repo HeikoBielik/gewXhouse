@@ -1,29 +1,29 @@
 within gewXhouse.Examples;
 
 model Example
-  gewXhouse.Models.Sun sun(cloudy = 80) annotation(
+  gewXhouse.Models.Sun sun annotation(
     Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  gewXhouse.Models.House house(floor_c = 15, floor_r_v = 1.5, venti_on_off = true) annotation(
+  gewXhouse.Models.House house(floor_c = 15, floor_r_v = 1.5, venti_on_off = false) annotation(
     Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interaction.Show.RealValue innerTemperature annotation(
     Placement(visible = true, transformation(origin = {50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Environment environment(filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt") annotation(
+  gewXhouse.Models.Environment environment(data_air = "temp.txt", data_floor = "temp_floor.txt") annotation(
     Placement(visible = true, transformation(origin = {56, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
 equation
   connect(sun.I_glob, house.I) annotation(
     Line(points = {{-38, 28}, {-22, 28}, {-22, 28}, {-22, 28}, {-22, 28}}, color = {0, 0, 127}));
+  connect(house.pos, sun.posHouse) annotation(
+    Line(points = {{-22, 20}, {-38, 20}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(house.SunPos, sun.sunPos) annotation(
+    Line(points = {{-22, 12}, {-38, 12}}, color = {0, 0, 127}, thickness = 0.5));
   connect(innerTemperature.numberPort, house.t_inside) annotation(
     Line(points = {{38.5, 50}, {30.25, 50}, {30.25, 36}, {22, 36}}, color = {0, 0, 127}));
   connect(house.port_b, environment.floor) annotation(
     Line(points = {{22, 16}, {42, 16}}, color = {191, 0, 0}));
   connect(house.out, environment.air) annotation(
     Line(points = {{22, 24}, {42, 24}}, color = {191, 0, 0}));
-  connect(house.pos, sun.posHouse) annotation(
-    Line(points = {{-22, 20}, {-38, 20}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(house.SunPos, sun.sunPos) annotation(
-    Line(points = {{-22, 12}, {-38, 12}}, color = {0, 0, 127}, thickness = 0.5));
   annotation(
-    experiment(StartTime = 0, StopTime = 604800, Tolerance = 1e-06, Interval = 302.4),
+    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 43.2216),
     Documentation(info = "<html><head></head><body><div><strong><span style=\"font-size: large;\">EXAMPLE <br></span></strong></div>
 <div>&nbsp;</div>
 <div>The example model gives the user the possiblity to simulate the inner temperature of the greenhouse over 25h. Moreover the can ajust the location, period of time, read in the enviroment data and greenhouse features. The user finds the window to parametrise the greenhouse, if you double click on the house. There are different ribbons with the desired topics to customize the model. The follwing image shows the princip of all available </div>

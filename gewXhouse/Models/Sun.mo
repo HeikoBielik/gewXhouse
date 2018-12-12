@@ -18,6 +18,7 @@ model Sun
   Real hour "actual time";
   Real phi "time equation";
   Real K;
+  Real I_max;
   //Real I;
   Modelica.Blocks.Interfaces.RealOutput I_glob annotation(
     Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -46,7 +47,9 @@ equation
   omega = (hour * 60 + phi + 4 * long - 60) / 4 - 180;
   alpha = sin(K * lat) * sin(K * delta) + cos(K * lat) * cos(K * delta) * cos(K * omega);
   beta = -(sin(K * lat) * alpha - sin(K * delta)) / (cos(K * lat) * sin(acos(alpha)));
-  I_glob = ((-1) * 3000 + 5000 * sin(0.000035 * (time - (86400*integer(time/86400))))) * (1 - cloudy / 100);
+  
+  I_max = (-1) * 3000 + 5000 * sin(0.000035 * (time - (86400*integer(time/86400))));
+  I_glob = (I_max *0.171) * (1 - cloudy / 100);
 //I_glob = if I<0 then 0 else I;
 algorithm
   sunPos[1] := asin(alpha) / K;
@@ -87,5 +90,5 @@ Position of the house with longitudinal and lateral coordinates</td>
 </table>
 <p>&nbsp;</p>
 </body></html>"),
-    experiment(StartTime = 0, StopTime = 1e+10, Tolerance = 1e-06, Interval = 1.00503e+07));
+    experiment(StartTime = 0, StopTime = 1e+10, Tolerance = 1e-06, Interval = 1.00604e+07));
 end Sun;
