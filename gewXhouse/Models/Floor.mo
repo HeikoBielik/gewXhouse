@@ -22,7 +22,7 @@ model Floor
     Placement(visible = true, transformation(origin = {-24, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   
   gewXhouse.Models.Radiation radiation annotation(
-    Placement(visible = true, transformation(origin = {10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {4, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.HeatCapacitor heatCapacitor annotation(
     Placement(visible = true, transformation(origin = {44, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   gewXhouse.Models.ThermalConductor thermalConductor annotation(
@@ -45,18 +45,18 @@ model Floor
     Placement(visible = true, transformation(origin = {-16, -46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
 equation
-  connect(thermalConductor1.port_a, heatCapacitor.port) annotation(
-    Line(points = {{52, -70}, {44, -70}, {44, 20}, {44, 20}}, color = {191, 0, 0}));
+  connect(radiation.port, heatCapacitor.port) annotation(
+    Line(points = {{14, -6}, {44, -6}, {44, 20}}, color = {191, 0, 0}));
   connect(thermalConductor.port_a, heatCapacitor.port) annotation(
     Line(points = {{52, -10}, {44, -10}, {44, 20}, {44, 20}}, color = {191, 0, 0}));
-  connect(radiation.port, heatCapacitor.port) annotation(
-    Line(points = {{20, -10}, {44, -10}, {44, 20}, {44, 20}}, color = {191, 0, 0}));
+  connect(radiation.S, s.y) annotation(
+    Line(points = {{1, 0}, {-35.8, 0}, {-35.8, 50}, {-56, 50}}, color = {0, 0, 127}));
+  connect(I, radiation.I) annotation(
+    Line(points = {{-24, -10}, {-12.5, -10}, {-12.5, -6}, {1, -6}}, color = {255, 207, 14}));
+  connect(thermalConductor1.port_a, heatCapacitor.port) annotation(
+    Line(points = {{52, -70}, {44, -70}, {44, 20}, {44, 20}}, color = {191, 0, 0}));
   connect(thermalConductor.port_b, heatPort) annotation(
     Line(points = {{72, -10}, {88, -10}, {88, -10}, {90, -10}}, color = {191, 0, 0}));
-  connect(I, radiation.I) annotation(
-    Line(points = {{-24, -10}, {7, -10}}, color = {255, 207, 14}));
-  connect(radiation.S, s.y) annotation(
-    Line(points = {{7, -4}, {-35.8, -4}, {-35.8, 50}, {-56, 50}}, color = {0, 0, 127}));
   connect(product4.y, product1.u2) annotation(
     Line(points = {{-4, -46}, {16, -46}, {16, -46}, {16, -46}}, color = {0, 0, 127}));
   connect(r_v.y, product4.u2) annotation(
@@ -93,33 +93,5 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, fillColor = {170, 85, 0}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(extent = {{-100, -34}, {120, -94}}, textString = "%name")}),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-    Documentation(info = "<html><head></head><body><p><b>FLOOR MODEL</b></p><p>The floor model is an important part of the greenhouse model. The short wave radiation from the sun, which will be transfered to the cover to the floor turns into long wave radiation in the flloor. The floor is the main \"capacity\" in the greenhouse. If the temperature in the greenhouse is higher than in the floor, the floors save energy and the other way round. The user has the possiblity to enter different materials with the material specific variables: heat transfer coeffizient, density and specific thermal capacity. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model. All needed paramters will transport automatically and the user does not have to connect the components in the floor. In the floor are interacting following modelica- standard components:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.HeatCapacitor\">heat capacitor</a></li><li><a href=\"modelica://gewXhouse.Models.Radiation\">radiation</a></li><li><a href=\"modelica://gewXhouse.Models.ThermalConductor\" style=\"font-size: 12px;\">thermal conductor</a></li></ul><br><p>&nbsp;</p>
-<p>Overview of house input/output&nbsp;</p>
-<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
-<tbody>
-<tr style=\"height: 39px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
-<td style=\"width: 198.917px; height: 39px; text-align: center;\"><strong>Variable</strong></td>
-<td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
-</tr>
-<tr style=\"height: 69px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
-<td style=\"width: 198.917px; height: 69px; text-align: center;\">I</td>
-<td style=\"width: 271.95px; height: 69px; text-align: center;\">Radiation from the sun will be transfered to other components in the greenhouse with the correct physical calculation</td>
-</tr>
-<tr style=\"height: 45px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 45px;\"><strong>Equations</strong></td>
-<td style=\"width: 198.917px; height: 45px;\">&nbsp;ja / nein? ich würde sagen nein!</td>
-<td style=\"width: 271.95px; height: 45px;\">&nbsp;</td>
-</tr>
-<tr style=\"height: 33.7167px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
-<td style=\"width: 198.917px; height: 33.7167px;\">
-<p style=\"text-align: center;\">heat Port</p>
-</td>
-<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">The heat port transfers the Q_flow inner the greenhouse</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p></body></html>"));
+    Documentation(info = "<html><head></head><body><p><b>FLOOR MODEL</b></p><p>The floor model is an important part of the greenhouse model. The short wave radiation from the sun, which will be transfered thopugh the cover to the floor turns into long wave radiation in the floor. The floor is the main \"capacity\" in the greenhouse. Through the radiation of the sun the floors gets warmer and transfers the heat to enviroment air. The user has the possiblity to enter different materials with the material specific variables: heat transfer coeffizient, density and specific thermal capacity. Those parameter can be changed in the&nbsp;<a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a>&nbsp;model.</p><p>In the floor are interacting following modelica standard components:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.HeatCapacitor\">heat capacitor</a></li><li><a href=\"modelica://gewXhouse.Models.Radiation\">radiation</a></li><li><a href=\"modelica://gewXhouse.Models.ThermalConductor\" style=\"font-size: 12px;\">thermal conductor</a></li></ul><div>The thermal conductors has three inputs: two temperatures inputs to calcute a difference and a material depended constant. The conductors returns a heatFLux ( Q_Flow) and is connected to the heat capacity. In the floor model are two conductors:</div><div>1. exchange between air and house floor&nbsp;</div><div>2. exchange between house floor and enviroment floor</div><div><br></div><div>Through the connector the solar radiation heats up the capacity of the floor.&nbsp;</div><div><br></div><div>The total floor capacity will be calculated in heat capacitor model.</div></body></html>"));
 end Floor;

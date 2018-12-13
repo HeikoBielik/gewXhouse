@@ -25,7 +25,7 @@ model Sun
   Modelica.Blocks.Interfaces.RealOutput sunPos[2] "altitude,azimuth" annotation(
     Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput posHouse[2] "long,lat" annotation(
-    Placement(visible = true, transformation(origin = {100, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {110, -50}, extent = {{10, -10}, {-10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
   if cardinality(posHouse[1]) == 0 then
     long = 8.7172797;
@@ -67,14 +67,14 @@ algorithm
 <td style=\"width: 272.65px; height: 39px; text-align: center;\"><strong>Description</strong></td>
 </tr>
 <tr style=\"height: 69px;\">
-<td style=\"width: 79px; text-align: center; height: 69px;\"> <img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\"> <strong>Input</strong></td>
+<td style=\"width: 79px; text-align: center; height: 69px;\"> <img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\"> <br><strong>Input</strong></td>
 <td style=\"width: 199.35px; height: 69px; text-align: center;\">posHouse[2]</td>
 <td style=\"width: 272.65px; height: 69px; text-align: center;\">
 Position of the house with longitudinal and lateral coordinates</td>
 </tr>
 
 <tr style=\"height: 33.7167px;\">
-<td style=\"width: 79px; text-align: center; height: 78.7167px;\" rowspan=\"2\"> <img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\"><strong>Output</strong></td>
+<td style=\"width: 79px; text-align: center; height: 78.7167px;\" rowspan=\"2\"> <img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\"><strong>Output</strong></td>
 <td style=\"width: 199.35px; height: 33.7167px;\">
 <p style=\"text-align: center;\">I_glob</p>
 </td>

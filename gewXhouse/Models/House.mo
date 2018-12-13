@@ -128,7 +128,7 @@ equation
   annotation(
     Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-33, -63}, extent = {{1, -15}, {-1, 15}}, textString = "L", fontSize = 15), Text(origin = {47, -49}, extent = {{1, -15}, {-1, 15}}, textString = "W", fontSize = 15), Text(origin = {69, -11}, extent = {{1, -15}, {-1, 15}}, textString = "H", fontSize = 15), Line(points = {{20, 0}, {-80, 0}}, color = {135, 135, 135}, pattern = LinePattern.Dash), Ellipse(origin = {20, 0}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 135), Line(points = {{-80, -80}, {20, -80}, {80, -50}, {80, 30}}, color = {255, 0, 0}, thickness = 0.5), Line(points = {{-80, -80}, {-80, 0}, {-30, 50}, {30, 80}, {80, 30}, {20, 0}}, color = {135, 135, 135}), Line(points = {{-30, 50}, {20, 0}, {20, -80}}, color = {135, 135, 135}), Text(origin = {-31, 21}, extent = {{1, -15}, {-1, 15}}, textString = "P", fontSize = 15), Line(origin = {-0.33, 0}, points = {{0, 80}, {-60, 50}}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 5), Text(origin = {-69, 65}, extent = {{1, -15}, {-1, 15}}, textString = "N", fontSize = 15), Ellipse(origin = {0, 80}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 206), Line(origin = {0, -0.33}, points = {{0, 80}, {-80, 80}}, color = {255, 0, 0}, thickness = 0.5)}, coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>HOUSE MODEL</b></p><p>The house model simulates a simplified interior from a greenhouse. The solar radioation, azimuth and elevation of the sun are necessary for calculating the inner temperature of the greenhouse. The user is able to adjust the greenhouse with ow parameters (length, width, height, orientation to the north, pitch). In the house are interacting different components e.g.:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of house input/output&nbsp;</p>
+  Documentation(info = "<html><head></head><body><p><b>HOUSE MODEL</b></p><p>The house model simulates a simplified interior from a greenhouse. The solar radioation, azimuth and elevation of the sun are necessary for calculating the inner temperature of the greenhouse. In the house are interacting different components e.g.:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of house input/output&nbsp;</p>
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
 <tbody>
 <tr style=\"height: 39px;\">
@@ -137,7 +137,8 @@ equation
 <td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
 </tr>
 <tr style=\"height: 69px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 69px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Input.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\" <p=\"\"><p></p><strong>Input<br><br></strong></td>
+<td style=\"width: 79.1333px; text-align: center; height: 69px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\">
+<p><strong>Input</strong></p><strong><br></strong></td>
 <td style=\"width: 198.917px; height: 69px; text-align: center;\">I</td>
 <td style=\"width: 271.95px; height: 69px; text-align: center;\">Radiation from the sun will be transfered to other components in the greenhouse with the correct physical calculation</td>
 </tr>
@@ -145,13 +146,18 @@ equation
 <td style=\"width: 198.917px; height: 45px; text-align: center;\">sunPos[2]</td>
 <td style=\"width: 271.95px; height: 45px;\">The sunPos[] with azimuth and elevation provides the house model to calculate solar radiation from from different angles and a value of the solar radioation over the day</td>
 </tr>
-
 <tr style=\"height: 33.7167px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Output.jpg\" alt=\"Smiley face\" height=\"42\" width=\"42\"><strong>Output</strong></td>
+<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
 <td style=\"width: 198.917px; height: 33.7167px;\">
 <p style=\"text-align: center;\">t_inside</p>
 </td>
 <td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">This value provides the user to see the simulated temperature in the greenhouse</td>
+</tr>
+<tr style=\"height: 33.7167px;\">
+<td style=\"width: 198.917px; height: 33.7167px;\">
+<p style=\"text-align: center;\">posHouse[2]</p>
+</td>
+<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">The house model outputs the lateral and longitudinal coordinates to the sun</td>
 </tr>
 </tbody>
 </table>

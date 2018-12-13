@@ -35,7 +35,7 @@ model Cover
   Modelica.Blocks.Interfaces.RealInput sunPos[2] "elevation, azimuth" annotation(
     Placement(visible = true, transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput I_Intern annotation(
-    Placement(visible = true, transformation(origin = {100, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    Placement(visible = true, transformation(origin = {120, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-40, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
     Placement(visible = true,transformation(extent = {{-42, -10}, {-22, 10}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -57,6 +57,8 @@ model Cover
   gewXhouse.Models.Glass glass(s.y=s.y,w_glass.y=w_glass,w_gas.y=w_gas,l_glass.y=l_glass,l_gas.y=l_gas) annotation(
     Placement(visible = true, transformation(origin = {50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(switch1.y, I_Intern) annotation(
+    Line(points = {{61, -80}, {120, -80}}, color = {0, 0, 127}));
   connect(heatCapacitor.c_p, c_p.y) annotation(
     Line(points = {{4, 36}, {-10, 36}, {-10, 44}, {-49, 44}}, color = {0, 0, 127}));
   connect(heatCapacitor.rho, rho.y) annotation(
@@ -83,8 +85,6 @@ equation
     Line(points = {{-2, -80}, {-12, -80}, {-12, -74}, {-48, -74}}, color = {0, 0, 127}));
   connect(switch1.u2, less1.y) annotation(
     Line(points = {{38, -80}, {21, -80}}, color = {255, 0, 255}));
-  connect(switch1.y, I_Intern) annotation(
-    Line(points = {{61, -80}, {100, -80}}, color = {0, 0, 127}));
   connect(product2.u2, I_glob) annotation(
     Line(points = {{-72, -80}, {-120, -80}}, color = {0, 0, 127}));
   connect(G.y, product2.u1) annotation(
@@ -110,7 +110,7 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the cover of the greenhouse model. The user is able to adapt his own cover-parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model:&nbsp;</p><p></p><ul><li>width of the cover</li><li>specific thermal capacity</li><li>density</li><li>thermal transmittance, lambda [W/m²k]</li></ul><div>In addiotion the cover models receives from the&nbsp;<a href=\"modelica://gewXhouse.Models.Sun\" style=\"font-size: 12px;\">sun</a>&nbsp;the azimuth and elevation, which is needed for running the model and returns the I_Intern which influences the inner temperature of the greenhouse.&nbsp;</div><p>Overview of cover input/output&nbsp;</p>
+  Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the cover of the greenhouse. The user is able to adapt his own cover parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model:</p><div>The heat capacity of the cover is calculated with the material specific constants. Moreover the capacity considerse a glass model, which transfers a heat flux between the environment air and house air.</div><div><br></div><div>The model calcutes the incoming solar positiv radiation through the cover with modelica standard components.</div><div><br></div><div><br></div><p>Overview of cover input/output&nbsp;</p>
 
 
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
@@ -121,7 +121,7 @@ equation
 <td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
 </tr>
 <tr style=\"height: 30.8px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 30.8px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
+<td style=\"width: 79.1333px; text-align: center; height: 30.8px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><br><strong>Input</strong></td>
 <td style=\"width: 198.917px; height: 30.8px; text-align: center;\">sunPos[]</td>
 <td style=\"width: 271.95px; height: 30.8px; text-align: center;\">azimuth and elevantion of the sun</td>
 </tr>
@@ -134,7 +134,7 @@ equation
 <td style=\"width: 198.917px; height: 33px;\">
 <p style=\"text-align: center;\">I_Intern</p>
 </td>
-<td style=\"width: 271.95px; height: 33px; text-align: center;\">transfers the passing solar radiation to the inner components of the greenhouse via thermal conductor </td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">transfers the passing and positive solar radiation to the inner components of the greenhouse&nbsp;</td>
 </tr>
 </tbody>
 </table>
