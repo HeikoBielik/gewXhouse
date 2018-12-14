@@ -47,9 +47,9 @@ model House
   parameter Real venti_nl = 0.01 "1/s ventilation rate" annotation(
     Dialog(group = "Parameter", tab = "Ventilation")); 
 //  parameter Real venti_dl = 1.2041 "kg/m3 desity" annotation(
-//    Dialog(group = "Parameter", tab = "Ventilation")); 
-//  parameter Real venti_c_p = 1005 "J/Kg.K specific thermal capacity" annotation(
-//    Dialog(group = "Parameter", tab = "Ventilation")); 
+  //    Dialog(group = "Parameter", tab = "Ventilation"));
+  //  parameter Real venti_c_p = 1005 "J/Kg.K specific thermal capacity" annotation(
+  //    Dialog(group = "Parameter", tab = "Ventilation"));
   parameter Boolean venti_on_off = false "Ventilation Switch On/Off" annotation(
     Dialog(group = "Parameter", tab = "Ventilation")); 
     
@@ -84,8 +84,9 @@ model House
     Placement(visible = true, transformation(origin = {-20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   gewXhouse.Models.Cover cover( c_p.y = cover_c_p, l_glass = cover_l_glass, l_gas=cover_l_gas, rho.y = cover_rho,s.y=sTotal,w_cover=cover_w_cover,w_gas=cover_w_gas,G.y=G) annotation(
     Placement(visible = true, transformation(origin = {-20, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  gewXhouse.Models.Ventilation ventilation(v.y = vTotal, nl.y=venti_nl,/* dl.y=venti_dl, c_p.y=venti_c_p,*/ V_on_off.y=venti_on_off) annotation(
+  gewXhouse.Models.Ventilation ventilation(v.y = vTotal, nl.y=venti_nl, V_on_off.y=venti_on_off) annotation(
     Placement(visible = true, transformation(origin = {40, 40}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
+  /* dl.y=venti_dl, c_p.y=venti_c_p,*/
   gewXhouse.Models.Air air(v.y = vTotal, rho.y=air_rho, c_p.y=air_c_p) annotation(
     Placement(visible = true, transformation(origin = {40, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 
@@ -128,8 +129,7 @@ equation
   annotation(
     Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-33, -63}, extent = {{1, -15}, {-1, 15}}, textString = "L", fontSize = 15), Text(origin = {47, -49}, extent = {{1, -15}, {-1, 15}}, textString = "W", fontSize = 15), Text(origin = {69, -11}, extent = {{1, -15}, {-1, 15}}, textString = "H", fontSize = 15), Line(points = {{20, 0}, {-80, 0}}, color = {135, 135, 135}, pattern = LinePattern.Dash), Ellipse(origin = {20, 0}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 135), Line(points = {{-80, -80}, {20, -80}, {80, -50}, {80, 30}}, color = {255, 0, 0}, thickness = 0.5), Line(points = {{-80, -80}, {-80, 0}, {-30, 50}, {30, 80}, {80, 30}, {20, 0}}, color = {135, 135, 135}), Line(points = {{-30, 50}, {20, 0}, {20, -80}}, color = {135, 135, 135}), Text(origin = {-31, 21}, extent = {{1, -15}, {-1, 15}}, textString = "P", fontSize = 15), Line(origin = {-0.33, 0}, points = {{0, 80}, {-60, 50}}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 5), Text(origin = {-69, 65}, extent = {{1, -15}, {-1, 15}}, textString = "N", fontSize = 15), Ellipse(origin = {0, 80}, lineColor = {135, 135, 135}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, startAngle = 180, endAngle = 206), Line(origin = {0, -0.33}, points = {{0, 80}, {-80, 80}}, color = {255, 0, 0}, thickness = 0.5)}, coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>HOUSE MODEL</b></p><p>The house model simulates a simplified interior from a greenhouse. The solar radioation, azimuth and elevation of the sun are necessary for calculating the inner temperature of the greenhouse. In the house are interacting different components e.g.:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of house input/output&nbsp;</p>
-<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
+  Documentation(info = "<html><head></head><body><p><b>HOUSE MODEL</b></p><p>The house model simulates a simplified interior from a greenhouse. The solar radioation, azimuth and elevation of the sun are necessary for calculating the inner temperature of the greenhouse. Moreover, the house model calculates the area of the surfaces and volumes, which will be needed in other models. In the house are interacting different components e.g.:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. More information about the models and connectors are stored in the above mentioned links.<div><br></div><div><br><div>Overview of house input/output&nbsp;</div><div><br><table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
 <tbody>
 <tr style=\"height: 39px;\">
 <td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
@@ -161,5 +161,5 @@ equation
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p></body></html>"));
+<p>&nbsp;</p></div></div></body></html>"));
 end House;

@@ -49,33 +49,6 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {170, 170, 255}, fillColor = {170, 85, 255}, fillPattern = FillPattern.CrossDiag, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>VENTILATION MODEL</b></p><p>The ventilation model is a component in the greenhouse, which enables the user to simluate a ventilation (without air conditioning) in the greenhouse. It is made up of a thermal conductor, which calculates the inner temperature of the greenhouse. The user has the possiblity to enter different ventilation rate. This parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model.&nbsp;</p>
-<p>Overview of ventilation input/output&nbsp;</p>
-<table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
-<tbody>
-<tr style=\"height: 39px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 39px;\">&nbsp;</td>
-<td style=\"width: 198.917px; height: 39px; text-align: center;\"><strong>Variable</strong></td>
-<td style=\"width: 271.95px; height: 39px; text-align: center;\"><strong>Description</strong></td>
-</tr>
-<tr style=\"height: 69px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Input.jpg\" alt=\"Smiley face\" width=\"45\" height=\"42\"><strong>Input</strong></td>
-<td style=\"width: 198.917px; height: 69px; text-align: center;\">n</td>
-<td style=\"width: 271.95px; height: 69px; text-align: center;\">ventilation rate [1/s]</td>
-</tr>
-
-
-
-
-
-<tr style=\"height: 33.7167px;\">
-<td style=\"width: 79.1333px; text-align: center; height: 78.7167px;\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
-<td style=\"width: 198.917px; height: 33.7167px;\">
-<p style=\"text-align: center;\">heat Port</p>
-</td>
-<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">The heat port transfers the Q_flow combined with the air from outside.</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p></body></html>"));
+  Documentation(info = "<html><head></head><body><p><b>VENTILATION MODEL</b></p><p>The ventilation model is a component in the greenhouse, which enables the user to simluate a ventilation in the greenhouse. It is made up of a thermal conductor, to exchange to house tempereature with the environmernt temperature. The user has the possiblity to enter different ventilation rate and turn the ventilation on/ off via switch. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model.&nbsp;</p>
+<p><br></p></body></html>"));
 end Ventilation;

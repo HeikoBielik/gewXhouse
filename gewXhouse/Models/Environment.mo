@@ -6,7 +6,6 @@ model Environment
   final parameter String filePath_temp = gewXhouse.Resources.Data.LibrarySystemPath + data_air;
   final parameter String filePath_temp_floor =  gewXhouse.Resources.Data.LibrarySystemPath + data_floor;
   //parameter String filePath = "C:/Users/m.jilg.LOCCIONI/Documents/GitHub/gewXhouse/gewXhouse/Resources/temp.txt";
-  
   Modelica.Blocks.Sources.CombiTimeTable temperature_air(extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint, fileName = filePath_temp, offset = {0}, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, startTime = 1, table = fill(0.0, 0, 2), tableName = "temp", tableOnFile = true, timeScale = 60, verboseRead = true) annotation(
     Placement(visible = true, transformation(origin = {-50, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Celsius.PrescribedTemperature prescribedTemperature annotation(
@@ -47,7 +46,7 @@ equation
   annotation(
     Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-80, 40}, {62, -40}}), Line(origin = {0.96813, 5.89242}, points = {{-39.934, -0.80248}, {-21.934, 5.19752}, {0.0659595, -0.802482}, {18.066, 3.19752}, {40.066, -2.80248}}, color = {85, 85, 255}, thickness = 1, smooth = Smooth.Bezier), Line(origin = {1.05813, -4.24758}, points = {{-39.934, -0.80248}, {-21.934, 5.19752}, {0.0659595, -0.802482}, {18.066, 3.19752}, {40.066, -2.80248}}, color = {85, 85, 255}, thickness = 1, smooth = Smooth.Bezier)}),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>ENVIRONMENT MODEL</b></p><p>The environment model is a component in the greenhouse, which which considers the environment temperature and exchange through the <a href=\"modelica://gewXhouse.Models.Cover\" style=\"font-size: 12px;\">cover</a> the heat flow and temperatues. The user user has the possibility to read the temperature outside and floor temperature with a modelica standdard Block&nbsp;<a href=\"modelica://Modelica.Blocks.Sources.CombiTimeTable\" style=\"font-size: 12px;\">combi timetable</a>.&nbsp;</p><p>Overview of environment input/output&nbsp;</p>
+  Documentation(info = "<html><head></head><body><p><b>ENVIRONMENT MODEL</b></p><p>The environment model is a component in the greenhouse, which connects the environment with the greenhousee. The user user has the possibility to read the temperature outside and floor temperature with a modelica standdard Block&nbsp;<a href=\"modelica://Modelica.Blocks.Sources.CombiTimeTable\" style=\"font-size: 12px;\">combi timetable</a>. Moreover, the user can the with a switch, if the floor temperature environment should be considered in the simulation.</p><p>Overview of environment input/output&nbsp;</p>
 
 
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
@@ -65,15 +64,15 @@ equation
 <tr style=\"height: 33px;\">
 <td style=\"width: 79.1333px; text-align: center; height: 66px;\" rowspan=\"2\"><img src=\"modelica://gewXhouse/Resources/Output.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"><strong>Output</strong></td>
 <td style=\"width: 198.917px; height: 33px;\">
-<p style=\"text-align: center;\">heat Port _a</p>
+<p style=\"text-align: center;\">heat Port _air</p>
 </td>
-<td style=\"width: 271.95px; height: 33px; text-align: center;\">connects the environment with the floor model and transfers the floor temperature</td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">connects the environment air temperature with the air house temperature</td>
 </tr>
 <tr style=\"height: 33px;\">
 <td style=\"width: 198.917px; height: 33px;\">
-<p style=\"text-align: center;\">prescribedtemprature</p>
+<p style=\"text-align: center;\">heat Port_floor</p>
 </td>
-<td style=\"width: 271.95px; height: 33px; text-align: center;\">connects the heat port the air model in the greenhouse</td>
+<td style=\"width: 271.95px; height: 33px; text-align: center;\">connects the house floor temperature with the ennvironment floor temperature</td>
 </tr>
 </tbody>
 </table>

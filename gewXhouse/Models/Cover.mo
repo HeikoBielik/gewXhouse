@@ -15,7 +15,6 @@ model Cover
   parameter Real w_gas "width";
   Modelica.Blocks.Sources.RealExpression w_glass(y=(w_cover-w_gas)/2) "width" annotation(
     Placement(visible = true, transformation(origin = {-60, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  
   //Real w_glass "width";
   parameter Real l_glass "W/m.K - lambda";
   parameter Real l_gas "W/m.K - lambda";
@@ -103,7 +102,7 @@ equation
     azimuth = sunPos[2];
   end if;
   K = pi / 180;
-  //w_glass.y=(w_cover-w_gas)/2;
+//w_glass.y=(w_cover-w_gas)/2;
 //  for i in 1:N loop
 //    I[i] = I_glob * (cos(sPitch[i] * K) + cos(abs(azimuth * K - sNorth[i])) * sin(sPitch[i] * K) * tan(elevation * K));
 //    Ip[i] = if I[i] < 0 or elevation * K < 0 or abs(sPitch[i] * K - elevation * K) > 41 then 0 else I[i];
@@ -113,7 +112,7 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the cover of the greenhouse. The user is able to adapt his own cover parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model:</p><div>The heat capacity of the cover is calculated with the material specific constants. Moreover the capacity considerse a glass model, which transfers a heat flux between the environment air and house air.</div><div><br></div><div>The model calcutes the incoming solar positiv radiation through the cover with modelica standard components.</div><div><br></div><div><br></div><p>Overview of cover input/output&nbsp;</p>
+  Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the cover of the greenhouse. The user is able to adapt his own cover parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model:</p><div>The heat capacity of the cover is calculated with the material specific constants. Moreover the capacity considers a <a href=\"modelica://gewXhouse.Models.Glass\">glass model</a>, which transfers a heat flux between the environment air and house air with customizable glass or double glazing model with gas.</div><div><br></div><div>The model calcutes the incoming solar positiv radiation through the cover with modelica standard components.</div><div><br></div><div>Overview of cover input/output&nbsp;</div><div><br></div>
 
 
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
