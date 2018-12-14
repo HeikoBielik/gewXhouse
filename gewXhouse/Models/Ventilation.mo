@@ -1,24 +1,23 @@
 within gewXhouse.Models;
 
 model Ventilation
-  parameter Modelica.Blocks.Sources.RealExpression v(y= 30) "m3 house volume" annotation(
+  parameter Modelica.Blocks.Sources.RealExpression v(y = 30) "m3 house volume" annotation(
     Placement(visible = true, transformation(origin = {-80, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Sources.RealExpression nl(y= 0.01) "1/s ventilation rate" annotation(
+  parameter Modelica.Blocks.Sources.RealExpression nl(y = 0.01) "1/s ventilation rate" annotation(
     Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Sources.RealExpression dl(y=1.2041) "kg/m3 desity" annotation(
+  parameter Modelica.Blocks.Sources.RealExpression dl(y = 1.2041) "kg/m3 desity" annotation(
     Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Sources.RealExpression c_p(y= 1005) "J/kg.K air" annotation(
+  parameter Modelica.Blocks.Sources.RealExpression c_p(y = 1005) "J/kg.K air" annotation(
     Placement(visible = true, transformation(origin = {-80, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Modelica.Blocks.Sources.BooleanExpression V_on_off(y=true) "true: Ventilation On / false:Ventilation Off" annotation(
+  parameter Modelica.Blocks.Sources.BooleanExpression V_on_off(y = true) "true: Ventilation On / false:Ventilation Off" annotation(
     Placement(visible = true, transformation(origin = {-80, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port for sensible heat input" annotation(
-    Placement(visible = true,transformation(extent = {{-42, 10}, {-22, 30}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(extent = {{-42, 10}, {-22, 30}}, rotation = 0), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a environment annotation(
     Placement(visible = true, transformation(origin = {62, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.ThermalConductor thermalConductor annotation(
     Placement(visible = true, transformation(origin = {20, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.MultiProduct multiProduct(nu = 4)  annotation(
+  Modelica.Blocks.Math.MultiProduct multiProduct(nu = 4) annotation(
     Placement(visible = true, transformation(origin = {-2, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Logical.Switch switch1 annotation(
     Placement(visible = true, transformation(origin = {-38, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -48,7 +47,7 @@ equation
   annotation(
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {170, 170, 255}, fillColor = {170, 85, 255}, fillPattern = FillPattern.CrossDiag, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
-  experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>VENTILATION MODEL</b></p><p>The ventilation model is a component in the greenhouse, which enables the user to simluate a ventilation in the greenhouse. It is made up of a thermal conductor, to exchange to house tempereature with the environmernt temperature. The user has the possiblity to enter different ventilation rate and turn the ventilation on/ off via switch. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model.&nbsp;</p>
+    experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
+    Documentation(info = "<html><head></head><body><p><b>VENTILATION MODEL</b></p><p>The ventilation model is a component in the greenhouse, which enables the user to simluate a ventilation in the greenhouse. It is made up of a thermal conductor, to exchange to house tempereature with the environmernt temperature. The user has the possiblity to enter different ventilation rate and turn the ventilation on/ off via switch. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model.&nbsp;</p>
 <p><br></p></body></html>"));
 end Ventilation;

@@ -113,7 +113,7 @@ equation
     annotation(
     Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}),Polygon(origin = {-3, -8}, fillColor = {223, 223, 223}, fillPattern = FillPattern.Solid, lineThickness = 0.5, points = {{-77, 18}, {-85, -22}, {-75, -48}, {-39, -68}, {13, -70}, {59, -60}, {85, -38}, {83, 4}, {61, 42}, {31, 64}, {3, 70}, {-31, 64}, {-57, 48}, {-57, 48}, {-77, 18}}), Line(origin = {-2.98, -44.01}, points = {{-85.0211, 14.0059}, {-73.0211, 34.0059}, {-75.0211, -11.9941}, {-55.0211, 8.00593}, {-39.0211, -31.9941}, {-13.0211, 8.00593}, {12.9789, -33.9941}, {38.9789, 10.0059}, {58.9789, -23.9941}, {70.9789, 18.0059}, {84.9789, -1.99407}}, thickness = 0.5), Line(origin = {0.2, -3.26}, points = {{79.7986, -0.739192}, {67.7986, -22.7392}, {35.7986, -30.7392}, {-16.2014, -32.7392}, {-58.2014, -32.7392}, {-76.2014, -6.73919}, {-80.2014, 13.2608}, {-60.2014, 35.2608}, {-76.2014, -6.73919}, {-44.2014, 9.26081}, {-58.2014, -32.7392}, {-58.2014, -32.7392}}, thickness = 0.5), Line(origin = {2.12, 2.22}, points = {{-62.1156, 37.7774}, {-62.1156, 29.7774}, {-46.1156, 3.77735}, {-18.1156, -38.2226}, {3.88442, 9.7774}, {33.8844, -36.2226}, {51.8844, 7.77735}, {65.8844, -28.2226}}, thickness = 0.5), Line(origin = {10.32, 29.75}, points = {{69.6756, -33.7476}, {43.6756, -19.7476}, {-4.32437, -17.7476}, {-54.3244, -23.7476}, {-30.3244, 14.2524}, {-70.3244, 2.25241}, {-44.3244, 26.2524}, {-30.3244, 14.2524}, {-10.3244, 32.2524}, {15.6756, 14.2524}, {17.6756, 26.2524}}, thickness = 0.5), Line(origin = {19.14, 27.18}, points = {{6.86036, 16.8179}, {-39.1396, 16.8179}, {-13.1396, -15.1821}, {6.86036, 16.8179}, {34.8604, -17.1821}, {38.8604, 6.81785}, {6.86036, 16.8179}}, thickness = 0.5), Text(origin = {-9, 80}, extent = {{47, -12}, {-47, 12}}, textString = "3V 4/9")}, coordinateSystem(initialScale = 0.1)),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
-  Documentation(info = "<html><head></head><body><p><b>IGLU MODEL</b></p><p>The iglu model simulates a simplified interior from a greenhouse. It is simulare to the   <a href=\"modelica://gewXhouse.Models.House\">house</a> model with iglu specific dimensions. It needs a diameter to calculting the surface, volume, to run the simulation the iglu greenhouse. As mentioned in the house model the iglu has following inner components:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of iglu input/output&nbsp;</p>
+  Documentation(info = "<html><head></head><body><p><b>IGLU MODEL</b></p><p>The iglu model simulates a simplified interior from a greenhouse. It is simulare to the   <a href=\"modelica://gewXhouse.Models.House\">house</a> model with iglu specific dimensions. It needs a diameter to calculting the surface, volume to run the simulation. As mentioned in the house model the iglu has following inner components:</p><p></p><ul><li><a href=\"modelica://gewXhouse.Models.Cover\">cover</a></li><li><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></li><li><a href=\"modelica://gewXhouse.Models.Floor\" style=\"font-size: 12px;\">floor</a></li><li><a href=\"modelica://gewXhouse.Models.Air\" style=\"font-size: 12px;\">air</a></li></ul>This components are interacting together with connectors. The red lines connect the temperatures within the different components and the blue lines link the flux from.&nbsp;<br><p>Overview of iglu input/output&nbsp;</p>
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
 <tbody>
 <tr style=\"height: 39px;\">
@@ -128,7 +128,7 @@ equation
 </tr>
 <tr style=\"height: 45px;\">
 <td style=\"width: 198.917px; height: 45px; text-align: center;\">sunPos[2]</td>
-<td style=\"width: 271.95px; height: 45px;\">The sunPos[] with azimuth and elevation provides the house model to calculate solar radiation from from different angles and a value of the solar radioation over the day</td>
+<td style=\"width: 271.95px; height: 45px;\">The sunPos[] with azimuth and elevation provides the iglu model to calculate solar radiation from from different angles and a value of the solar radioation over the day</td>
 </tr>
 
 <tr style=\"height: 33.7167px;\">
@@ -136,7 +136,7 @@ equation
 <td style=\"width: 198.917px; height: 33.7167px;\">
 <p style=\"text-align: center;\">t_inside</p>
 </td>
-<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">This value provides the user to see the simulated temperature in the greenhouse</td>
+<td style=\"width: 271.95px; height: 33.7167px; text-align: center;\">This value provides the user to see the simulated temperature in the iglu</td>
 </tr>
 </tbody>
 </table>
