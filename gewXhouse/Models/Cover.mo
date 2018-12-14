@@ -13,7 +13,10 @@ model Cover
   
   parameter Real w_cover "width";
   parameter Real w_gas "width";
-  Real w_glass "width";
+  Modelica.Blocks.Sources.RealExpression w_glass(y=(w_cover-w_gas)/2) "width" annotation(
+    Placement(visible = true, transformation(origin = {-60, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
+  //Real w_glass "width";
   parameter Real l_glass "W/m.K - lambda";
   parameter Real l_gas "W/m.K - lambda";
   
@@ -54,17 +57,17 @@ model Cover
     Placement(visible = true, transformation(origin = {50, -80}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
   parameter Modelica.Blocks.Sources.RealExpression const(y = 0) annotation(
     Placement(visible = true, transformation(origin = {-30, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  gewXhouse.Models.Glass glass(s.y=s.y,w_glass.y=w_glass,w_gas.y=w_gas,l_glass.y=l_glass,l_gas.y=l_gas) annotation(
+  gewXhouse.Models.Glass glass(s.y=s.y,w_glass.y=w_glass.y,w_gas.y=w_gas,l_glass.y=l_glass,l_gas.y=l_gas) annotation(
     Placement(visible = true, transformation(origin = {50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(product.u1, w_glass.y) annotation(
+    Line(points = {{-30, 78}, {-45, 78}, {-45, 80}, {-60, 80}}, color = {0, 0, 127}));
   connect(switch1.y, I_Intern) annotation(
     Line(points = {{61, -80}, {120, -80}}, color = {0, 0, 127}));
   connect(heatCapacitor.c_p, c_p.y) annotation(
     Line(points = {{4, 36}, {-10, 36}, {-10, 44}, {-49, 44}}, color = {0, 0, 127}));
   connect(heatCapacitor.rho, rho.y) annotation(
     Line(points = {{4, 28}, {-49, 28}}, color = {0, 0, 127}));
-  connect(product.u1, w_glass) annotation(
-    Line(points = {{-30, 78}, {-39.5, 78}, {-39.5, 84}, {-49, 84}}, color = {0, 0, 127}));
   connect(heatCapacitor.port, glass.port_inner) annotation(
     Line(points = {{20, 20}, {20, 20}, {20, 0}, {38, 0}, {38, 0}}, color = {191, 0, 0}));
   connect(glass.port_inner, heatPort) annotation(
@@ -100,7 +103,7 @@ equation
     azimuth = sunPos[2];
   end if;
   K = pi / 180;
-  w_glass=(w_cover-w_gas)/2;
+  //w_glass.y=(w_cover-w_gas)/2;
 //  for i in 1:N loop
 //    I[i] = I_glob * (cos(sPitch[i] * K) + cos(abs(azimuth * K - sNorth[i])) * sin(sPitch[i] * K) * tan(elevation * K));
 //    Ip[i] = if I[i] < 0 or elevation * K < 0 or abs(sPitch[i] * K - elevation * K) > 41 then 0 else I[i];

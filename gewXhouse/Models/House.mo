@@ -46,10 +46,10 @@ model House
   
   parameter Real venti_nl = 0.01 "1/s ventilation rate" annotation(
     Dialog(group = "Parameter", tab = "Ventilation")); 
-  parameter Real venti_dl = 1.2041 "kg/m3 desity" annotation(
-    Dialog(group = "Parameter", tab = "Ventilation")); 
-  parameter Real venti_c_p = 1005 "J/Kg.K specific thermal capacity" annotation(
-    Dialog(group = "Parameter", tab = "Ventilation")); 
+//  parameter Real venti_dl = 1.2041 "kg/m3 desity" annotation(
+//    Dialog(group = "Parameter", tab = "Ventilation")); 
+//  parameter Real venti_c_p = 1005 "J/Kg.K specific thermal capacity" annotation(
+//    Dialog(group = "Parameter", tab = "Ventilation")); 
   parameter Boolean venti_on_off = false "Ventilation Switch On/Off" annotation(
     Dialog(group = "Parameter", tab = "Ventilation")); 
     
@@ -84,7 +84,7 @@ model House
     Placement(visible = true, transformation(origin = {-20, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   gewXhouse.Models.Cover cover( c_p.y = cover_c_p, l_glass = cover_l_glass, l_gas=cover_l_gas, rho.y = cover_rho,s.y=sTotal,w_cover=cover_w_cover,w_gas=cover_w_gas,G.y=G) annotation(
     Placement(visible = true, transformation(origin = {-20, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  gewXhouse.Models.Ventilation ventilation(v.y = vTotal, nl.y=venti_nl, dl.y=venti_dl, c_p.y=venti_c_p, V_on_off.y=venti_on_off) annotation(
+  gewXhouse.Models.Ventilation ventilation(v.y = vTotal, nl.y=venti_nl,/* dl.y=venti_dl, c_p.y=venti_c_p,*/ V_on_off.y=venti_on_off) annotation(
     Placement(visible = true, transformation(origin = {40, 40}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
   gewXhouse.Models.Air air(v.y = vTotal, rho.y=air_rho, c_p.y=air_c_p) annotation(
     Placement(visible = true, transformation(origin = {40, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));

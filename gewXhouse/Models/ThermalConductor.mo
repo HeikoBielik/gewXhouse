@@ -2,7 +2,7 @@ within gewXhouse.Models;
 
 model ThermalConductor "Lumped thermal element transporting heat without storing it"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  Modelica.Blocks.Interfaces.RealInput G "glass W/K" annotation(
+  Modelica.Blocks.Interfaces.RealInput G "W/K" annotation(
     Placement(visible = true, transformation(origin = {0, 100}, extent = {{-20, -20}, {20, 20}}, rotation = -90), iconTransformation(origin = {0, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   //Modelica.SIunits.ThermalConductance G "Constant thermal conductance of material";
 equation

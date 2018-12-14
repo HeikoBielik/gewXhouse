@@ -1,9 +1,9 @@
 within gewXhouse.Models;
 
 model HeatCapacitor "Lumped thermal element storing heat"
-  Modelica.Blocks.Interfaces.RealInput rho " 1014.42 kg/m3 density" annotation(
+  Modelica.Blocks.Interfaces.RealInput rho "kg/m3 density" annotation(
     Placement(visible = true, transformation(origin = {-90, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput c_p " 840 specific thermal capacity" annotation(
+  Modelica.Blocks.Interfaces.RealInput c_p "specific thermal capacity" annotation(
     Placement(visible = true, transformation(origin = {-90, -20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput volume annotation(
     Placement(visible = true, transformation(origin = {-90, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
