@@ -1,6 +1,7 @@
 within gewXhouse.Examples;
 
 model Example
+extends Modelica.Icons.Example;
   gewXhouse.Models.Sun sun annotation(
     Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   gewXhouse.Models.House house(floor_c = 15, floor_r_v = 1.5, venti_on_off = false) annotation(
