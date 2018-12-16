@@ -23,8 +23,9 @@ equation
   connect(port, heatCapacitor.port) annotation(
     Line(points = {{0, -70}, {0, -70}, {0, -20}, {0, -20}}, color = {191, 0, 0}));
   annotation(
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
-    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Text(extent = {{-110, -54}, {110, -114}}, textString = "%name"), Ellipse(lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-60, 60}, {60, -60}}, endAngle = 360)}),
+    defaultComponentName = "air",
+    Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics),
+    Icon(coordinateSystem(preserveAspectRatio = true, initialScale = 0.1), graphics = {Text(extent = {{-110, -54}, {110, -114}}, textString = "%name"), Ellipse(lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-60, 60}, {60, -60}}, endAngle = 360)}),
   experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
   Documentation(info = "<html><head></head><body><p><b>AIR MODEL</b></p><p>The air model is a component in the greenhouse, which interact with all components in the greenhouse and influence each other. The user is able to change the medium in the<span style=\"font-size: 12px;\">&nbsp;</span><a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a>&nbsp;model.</p><p>The capacity of the air is calculated in this model with modelica <a href=\"modelica://Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\" style=\"font-size: 12px;\">heat capacity</a> Block, which needs the volume of house, specific thermal capacity and the density of the medium (material specific parameters). The model returns a resulting temperature and heat flux to the other components in the greenhouse via  <a href=\"modelica://Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\" style=\"font-size: 12px;\">heat port</a>.</p></body></html>"));
 end Air;

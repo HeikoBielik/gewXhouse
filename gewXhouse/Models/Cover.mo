@@ -109,8 +109,9 @@ equation
 //  end for;
 //  I_Intern = sum(Ip);
   annotation(
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
-    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
+    defaultComponentName = "cover",
+    Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics),
+    Icon(coordinateSystem(preserveAspectRatio = true, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {0, 117, 227}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
   Documentation(info = "<html><head></head><body><p><b>COVER MODEL</b></p><p>The cover model simluates the simplified model of the greenhouse cover. The user is able to adapt his own cover parameters in the <a href=\"modelica://gewXhouse.Models.House\">house</a> model.</p><div>The heat capacity of the cover is calculated with the material specific constants (density, specific thermal capacity). Moreover the capacity of the cover includes a <a href=\"modelica://gewXhouse.Models.Glass\">glass model</a>, which transfers a heat flux between the environment air and house air with customizable glass or double glazing model with gas.</div><div><br></div><div>To enhance the quality of the model, the negativ solar radiation is not considered, realized with the standard adapted modelica <a href=\"modelica://Modelica.Blocks.Logical.Less\">less</a> and a <a href=\"modelica://Modelica.Blocks.Logical.Switch\">switch</a>  block. For the calculation of the passing positiv radiation, the model needs the azimuth and elevation from the sun and the direct solar radiation I.</div><div><br></div><div>Overview of cover input/output&nbsp;</div><div><br></div>
 

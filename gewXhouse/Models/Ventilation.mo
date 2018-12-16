@@ -45,8 +45,9 @@ equation
   connect(dl.y, multiProduct.u[2]) annotation(
     Line(points = {{-69, 0}, {-60, 0}, {-60, -20}, {-12, -20}}, color = {0, 0, 127}));
   annotation(
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
-    Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {170, 170, 255}, fillColor = {170, 85, 255}, fillPattern = FillPattern.CrossDiag, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
+    defaultComponentName = "ventilation",
+    Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics),
+    Icon(coordinateSystem(preserveAspectRatio = true, initialScale = 0.1), graphics = {Rectangle(rotation = 90, lineColor = {170, 170, 255}, fillColor = {170, 85, 255}, fillPattern = FillPattern.CrossDiag, extent = {{-20, 80}, {20, -80}}), Text(origin = {-60, 0}, extent = {{-50, -34}, {170, -94}}, textString = "%name")}),
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 86.5731),
     Documentation(info = "<html><head></head><body><p><b>VENTILATION MODEL</b></p><p>The ventilation model is a component in the greenhouse, which enables the user to simluate a ventilation in the greenhouse. It is made up of a thermal conductor, to exchange to house tempereature with the environmernt temperature. The user has the possiblity to enter different ventilation rate and turn the ventilation on/ off via switch. Those parameter can be changed in the <a href=\"modelica://gewXhouse.Models.House\" style=\"font-size: 12px;\">house</a> model.&nbsp;</p>
 <p><br></p></body></html>"));

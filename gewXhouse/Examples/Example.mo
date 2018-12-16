@@ -10,18 +10,18 @@ model Example
   gewXhouse.Models.Environment environment(data_air = "temp.txt", data_floor = "temp_floor.txt") annotation(
     Placement(visible = true, transformation(origin = {56, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
 equation
-  connect(sun.I_glob, house.I) annotation(
-    Line(points = {{-38, 28}, {-22, 28}, {-22, 28}, {-22, 28}, {-22, 28}}, color = {0, 0, 127}));
-  connect(house.pos, sun.posHouse) annotation(
-    Line(points = {{-22, 20}, {-38, 20}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(house.SunPos, sun.sunPos) annotation(
-    Line(points = {{-22, 12}, {-38, 12}}, color = {0, 0, 127}, thickness = 0.5));
-  connect(innerTemperature.numberPort, house.t_inside) annotation(
-    Line(points = {{38.5, 50}, {30.25, 50}, {30.25, 36}, {22, 36}}, color = {0, 0, 127}));
-  connect(house.port_b, environment.floor) annotation(
-    Line(points = {{22, 16}, {42, 16}}, color = {191, 0, 0}));
   connect(house.out, environment.air) annotation(
     Line(points = {{22, 24}, {42, 24}}, color = {191, 0, 0}));
+  connect(house.port_b, environment.floor) annotation(
+    Line(points = {{22, 16}, {42, 16}}, color = {191, 0, 0}));
+  connect(innerTemperature.numberPort, house.t_inside) annotation(
+    Line(points = {{38.5, 50}, {30.25, 50}, {30.25, 36}, {22, 36}}, color = {0, 0, 127}));
+  connect(house.SunPos, sun.sunPos) annotation(
+    Line(points = {{-22, 12}, {-38, 12}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(house.pos, sun.posHouse) annotation(
+    Line(points = {{-22, 20}, {-38, 20}}, color = {0, 0, 127}, thickness = 0.5));
+  connect(sun.I_glob, house.I) annotation(
+    Line(points = {{-38, 28}, {-22, 28}}, color = {0, 0, 127}));
   annotation(
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 43.2216),
     Documentation(info = "<html><head></head><body><div>This example model allows the simulation of the indoor temperature of a greenhouse over 24 hours. The location, time period, ambient temperature and properties of the greenhouse can be freely parameterized.&nbsp;</div><div><br></div><div>This example model was assembled with the individual models \"Sun\", \"House\" and \"Environment\" from greenhouse library. During the simluation the models interact with each other and exchange. The data exchange is realized by the connectors, provided by Modelica. Detailed information about the connectors can be found in&nbsp;<i>Modelica/Blocks/Interafces</i>&nbsp;and&nbsp;<i>Modelica/Thermal/Interfaces</i>. The data exchanges between the models is shown in the figure above.</div><div><br></div>
