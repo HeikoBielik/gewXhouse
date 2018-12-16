@@ -34,7 +34,6 @@ equation
 //---general---
   K = pi / 180;
 //-------------
-
 //---if input not used---
   if cardinality(posHouse[1]) == 0 then
     long = 8.7172797 "location of Pforzheim University";
@@ -47,16 +46,15 @@ equation
     lat = posHouse[2];
   end if;
 //-----------------------
-
 //---calculate global solar radiation---
-  I_max = (-1) * 3000 + 5000 * sin(0.000035 * (time - (86400*integer(time/86400))));
+  I_max = (-1) * 3000 + 5000 * sin(0.000035 * (time - 86400 * integer(time / 86400)));
   I_glob = (I_max *k) * (1 - cloudy / 100);
 //I_glob = if I<0 then 0 else I;
 //--------------------------------------
-
 //---calculate sun position---
   hour = time / 60 / 60;
-  n = (month - 1) * 30.3 + day; //Time elapsed from january 1st;
+  n = (month - 1) * 30.3 + day;
+//Time elapsed from january 1st;
   m = (n - 1 + (hour - 12) / 24) / 365;
   delta = (0.006918 - 0.399912 * cos(2 * pi * m) + 0.070257 * sin(2 * pi * m) - 0.006758 * cos(4 * pi * m) + 0.000907 * sin(4 * pi * m) - 0.002697 * cos(6 * pi * m) + 0.00148 * sin(6 * pi * m)) / K;
   phi = 229.18 * (0.000075 + 0.001868 * cos(2 * pi * m) - 0.032077 * sin(2 * pi * m) - 0.014615 * cos(4 * pi * m) - 0.040849 * sin(4 * pi * m));
@@ -71,7 +69,7 @@ algorithm
   annotation(
     defaultComponentName = "sun",
     Icon(graphics = {Text(origin = {0, -60}, lineColor = {190, 0, 0}, extent = {{-180, -28}, {180, -60}}, textString = "%name"), Ellipse(lineColor = {255, 128, 0}, fillColor = {255, 226, 6}, fillPattern = FillPattern.Solid, extent = {{-40, 40}, {40, -40}}, endAngle = 360), Line(points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 45, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 90, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 135, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 180, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 225, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 270, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Line(rotation = 315, points = {{80, 0}, {50, 0}}, color = {255, 128, 0}), Polygon(origin = {24, -39}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-54, -3}, {-42, 17}, {-10, 27}, {32, 29}, {54, 9}, {50, -17}, {18, -29}, {-40, -25}, {-54, -3}})}, coordinateSystem(initialScale = 0.1)),
-    Documentation(info = "<html><head></head><body><div><b><font size=\"4\">SUN MODEL</font></b></div><div><br></div><div>The sun model &nbsp;represents a simplified model of the sun. The position of the <a href=\"modelica://gewXhouse.Models.House\">house</a>&nbsp;model is needed (input via connector) to performe the calculations. This model calcutes the azimuth, elevation and the solar radiation. The position of the sun and the solar radiation will be transmitted via connector to the&nbsp;<a href=\"modelica://gewXhouse.Models.Cover\">cover</a>&nbsp;of house model, because those values will be needed in further calculation in the greenhouse. The user is able to adjust the day and month of a year to calculate azimuth and elevation on a specific day. Additioally, the user can enter the coudiness of the day, which can be provided by the e.g. the DWD (Deutscher Wetter Dienst).</div><p></p> <p></p>
+    Documentation(info = "<html><head></head><body><div><b><font size=\"4\">SUN MODEL</font></b></div><div><br></div><div><!--StartFragment--><div style=\"font-size: 12px;\">The sun model calculates the incoming solar radiation depending on the greenhouses position. The transmitted variables are azimuth angle, elevation angle, and the amount of solar radiation.</div><div style=\"font-size: 12px;\">User input parameters are the date to calculate the suns position as well as the amount of clouds on that day</div><!--EndFragment--></div><p></p> <p></p>
 <p>Overview of sun input/output&nbsp;</p>
 <table style=\"height: 200px; width: 574px; border-color: black; margin-left: auto; margin-right: auto;\" border=\"1\">
 <tbody>
