@@ -25,7 +25,7 @@ model Sun
   
   parameter Real cloudy = 0 "Cloudy in % [0..100] '0 = no cloud'"  annotation(
     Dialog(group = "Environmental parameters"));
-  parameter Real k = 0.171 "Factor of atmosferic influence"  annotation(
+  parameter Real k = 0.171 "Factor of atmospheric influence"  annotation(
     Dialog(group = "Environmental parameters"));
   Real I_max "W/m2 maximal solar radiation";
   Modelica.Blocks.Interfaces.RealOutput I_glob "W/m2 direct solar radiation" annotation(
