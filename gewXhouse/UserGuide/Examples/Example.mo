@@ -6,15 +6,15 @@ extends Modelica.Icons.Example;
     Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   gewXhouse.Models.House house(floor_c = 15, floor_r_v = 1.5, venti_on_off = false) annotation(
     Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Blocks.Interaction.Show.RealValue innerTemperature annotation(
+  Modelica.Blocks.Interaction.Show.RealValue innerTemperature "Inner Temperature" annotation(
     Placement(visible = true, transformation(origin = {50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   gewXhouse.Models.Environment environment(data_air = "temp.txt", data_floor = "temp_floor.txt") annotation(
-    Placement(visible = true, transformation(origin = {56, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {60, 20}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
 equation
-  connect(house.out, environment.air) annotation(
-    Line(points = {{22, 24}, {42, 24}}, color = {191, 0, 0}));
   connect(house.port_b, environment.floor) annotation(
-    Line(points = {{22, 16}, {42, 16}}, color = {191, 0, 0}));
+    Line(points = {{22, 16}, {46, 16}}, color = {191, 0, 0}));
+  connect(house.out, environment.air) annotation(
+    Line(points = {{22, 24}, {46, 24}}, color = {191, 0, 0}));
   connect(innerTemperature.numberPort, house.t_inside) annotation(
     Line(points = {{38.5, 50}, {30.25, 50}, {30.25, 36}, {22, 36}}, color = {0, 0, 127}));
   connect(house.SunPos, sun.sunPos) annotation(
@@ -24,6 +24,7 @@ equation
   connect(sun.I_glob, house.I) annotation(
     Line(points = {{-38, 28}, {-22, 28}}, color = {0, 0, 127}));
   annotation(
+    preferredView="default",
     experiment(StartTime = 0, StopTime = 86400, Tolerance = 1e-06, Interval = 43.2216),
     Documentation(info = "<html><head></head><body><div><!--StartFragment--><div style=\"font-size: 12px;\">This example model allows the simulation of the indoor temperature of a greenhouse over 24 hours. The location, time period, ambient temperature and properties of the greenhouse can be freely parameterized.&nbsp;</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\">The model is assembled with the all necessary models e.g. \"Sun\", \"House\" and \"Environment\" from greenhouse library to simulate a temperature course in the greenhouse nodel. Detailed information about the connectors can be found in&nbsp;<i>Modelica/Blocks/Interafces</i>&nbsp;and&nbsp;<i>Modelica/Thermal/Interfaces</i>. The data exchanges between the models is shown in the figure below.</div><!--EndFragment--></div><div><br></div>
 <u>Example model</u> <p></p>
