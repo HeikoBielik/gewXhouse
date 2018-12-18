@@ -90,6 +90,7 @@ equation
   connect(c_p.y, heatCapacitor.c_p) annotation(
     Line(points = {{-22, 36}, {28, 36}}, color = {0, 0, 127}));
   annotation(
+    preferredView="default",
     defaultComponentName = "floor",
     Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics),
     Icon(coordinateSystem(preserveAspectRatio = true, initialScale = 0.1), graphics = {Rectangle(rotation = 90, fillColor = {170, 85, 0}, fillPattern = FillPattern.Backward, extent = {{-20, 80}, {20, -80}}), Text(extent = {{-100, -34}, {120, -94}}, textString = "%name")}),

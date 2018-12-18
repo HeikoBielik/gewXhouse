@@ -3,6 +3,7 @@ within gewXhouse;
 package Models
   extends Modelica.Icons.Package;
   annotation(
+    preferredView="info",
     Documentation(info = "<html><head></head><body><div><!--StartFragment-->The models in this library package contains all the availble blocks to build up a greenhouse simulation. For more detailed information click the links.<!--EndFragment--></div><div><br></div><div>
 <table style=\"height: 630px; width: 619.15px;\" border=\"1\">
 <tbody>

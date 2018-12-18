@@ -61,6 +61,7 @@ equation
   connect(product1.y, glass1.G) annotation(
     Line(points = {{-4, -40}, {0, -40}, {0, -18}, {0, -18}}, color = {0, 0, 127}));
   annotation(
+    preferredView="default",
     defaultComponentName = "glass",
     experiment(StartTime = 0, StopTime = 7200, Tolerance = 1e-06, Interval = 14.4),
     Icon(graphics = {Rectangle(origin = {-21, 0}, fillColor = {170, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-19, 80}, {61, -80}}),Text(origin = {-2, -20},extent = {{-110, -54}, {110, -114}}, textString = "%name"), Rectangle(fillColor = {232, 255, 228}, fillPattern = FillPattern.Solid, extent = {{-20, 80}, {20, -80}}), Line(origin = {-3, 0}, points = {{-77, 0}, {83, 0}}, color = {170, 0, 0}, thickness = 0.5, arrow = {Arrow.Filled, Arrow.Filled}, arrowSize = 10)}, coordinateSystem(initialScale = 0.1)),

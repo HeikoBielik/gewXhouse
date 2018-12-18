@@ -1,6 +1,8 @@
 package gewXhouse
 
   annotation(
+  
+    preferredView="info",
     uses(Modelica(version = "3.2.2")),
     Documentation(info = "<html>
 
