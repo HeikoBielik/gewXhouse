@@ -44,7 +44,7 @@ package Models
 </tr>
 <tr>
 <td style=\"width: 78px; text-align: center;\">ThermalConductor <br><img src=\"modelica://gewXhouse/Resources/thermalconductormodel.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"></td>
-<td style=\"width: 298px;\">Represents the thermal capacity of the single models</td>
+<td style=\"width: 298px;\">Represents the thermal conductivity between two models</td>
 <td style=\"width: 214.15px; text-align: center;\"><a href=\"modelica://gewXhouse.Models.ThermalConductor\">thermal concuctor</a></td>
 </tr>
 <tr>
@@ -54,7 +54,7 @@ package Models
 </tr>
 <tr>
 <td style=\"width: 78px; text-align: center;\">Ventilation<br> <img src=\"modelica://gewXhouse/Resources/ventilationmodel.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"></td>
-<td style=\"width: 298px;\">The ventilation simulates a simple ventilation for regulating the exchange between the inner and outer temperature</td>
+<td style=\"width: 298px;\">The ventilation simulates a simple ventilation for regulating the air exchange between inside and environment</td>
 <td style=\"width: 214.15px; text-align: center;\"><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></td>
 </tr>
 <tr>

@@ -3,9 +3,15 @@ within gewXhouse;
 package UserGuide
   extends Modelica.Icons.Info;
 
+
+
+
+
+  extends Modelica.Icons.Info;
+
 annotation(
     DocumentationClass = true,
-    Documentation(info = "<html><head></head><body><div>In this gewXhouse library are implemented different models to simulate a greenhouse. Feel free to click on the link in the table to receive more infomation about the desired model.</div><div><br>Moreover, the library contains an example to see the possitbilities of the house model and shows the the conncetions between the models and how the interact with each other. For more information you can open directly the<a href=\"modelica://gewXhouse.UserGuide.Examples.Example\">&nbsp;example greenhouse</a>. The documentaition of the example provides the user an overview about the variables of a greenhouse.<div>&nbsp;&nbsp;</div>
+    Documentation(info = "<html><head></head><body><div>In this gewXhouse library are implemented different models to simulate a greenhouse. Feel free to click on the link in the table to receive more infomation about the desired model.</div><div><br>Moreover, the library contains an example to see the possitbilities of the house model and shows the connections between the models and how the interact with each other. For more information you can open directly the&nbsp;<a href=\"modelica://gewXhouse.UserGuide.Examples.Example\">example greenhouse</a>. The documentaition of the example provides the user an overview about the variables of a greenhouse.<div>&nbsp;&nbsp;</div>
 <div>&nbsp;</div><div><strong>Overview models</strong><br><br>
 <table style=\"height: 630px; width: 619.15px;\" border=\"1\">
 <tbody>
@@ -46,7 +52,7 @@ annotation(
 </tr>
 <tr>
 <td style=\"width: 78px; text-align: center;\">ThermalConductor <br><img src=\"modelica://gewXhouse/Resources/thermalconductormodel.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"></td>
-<td style=\"width: 298px;\">Represents the thermal capacity of the single models</td>
+<td style=\"width: 298px;\">Represents the thermal conductivity between two models</td>
 <td style=\"width: 214.15px; text-align: center;\"><a href=\"modelica://gewXhouse.Models.ThermalConductor\">thermal concuctor</a></td>
 </tr>
 <tr>
@@ -56,7 +62,7 @@ annotation(
 </tr>
 <tr>
 <td style=\"width: 78px; text-align: center;\">Ventilation<br> <img src=\"modelica://gewXhouse/Resources/ventilationmodel.jpg\" alt=\"Smiley face\" width=\"42\" height=\"42\"></td>
-<td style=\"width: 298px;\">The ventilation simulates a simple ventilation for regulating the exchange between the inner and outer temperature</td>
+<td style=\"width: 298px;\">The ventilation simulates a simple ventilation for regulating the air exchange between inside and environment</td>
 <td style=\"width: 214.15px; text-align: center;\"><a href=\"modelica://gewXhouse.Models.Ventilation\">ventilation</a></td>
 </tr>
 <tr>
