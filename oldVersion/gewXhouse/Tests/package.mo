@@ -1,8 +1,0 @@
-within gewXhouse;
-
-package Tests
-
-annotation(
-    Icon(graphics = {Polygon(pattern = LinePattern.Dash, lineThickness = 2.5, points = {{-70, 80}, {70, 80}, {80, 70}, {80, -70}, {70, -80}, {-70, -80}, {-80, -70}, {-80, 70}, {-70, 80}}, smooth = Smooth.Bezier), Rectangle(origin = {-39, 39}, lineThickness = 2, extent = {{-11, 11}, {11, -11}}), Rectangle(origin = {-39, -1}, lineThickness = 2, extent = {{-11, 11}, {11, -11}}), Rectangle(origin = {-39, -41}, lineThickness = 2, extent = {{-11, 11}, {11, -11}}), Line(origin = {11, 30}, points = {{-17, 0}, {17, 0}}, thickness = 2), Line(origin = {45, 30}, points = {{-9, 0}, {9, 0}}, thickness = 2), Line(origin = {24, 40}, points = {{-28, 0}, {28, 0}}, pattern = LinePattern.Dash, thickness = 2), Line(origin = {22.1132, -0.849057}, points = {{-28, 0}, {28, 0}}, pattern = LinePattern.Dash, thickness = 2), Line(origin = {9.11321, -10.8491}, points = {{-17, 0}, {17, 0}}, thickness = 2), Line(origin = {43.1132, -10.8491}, points = {{-9, 0}, {9, 0}}, thickness = 2), Line(origin = {21.8774, -41.0377}, points = {{-28, 0}, {28, 0}}, pattern = LinePattern.Dash, thickness = 2), Line(origin = {8.87736, -51.0378}, points = {{-17, 0}, {17, 0}}, thickness = 2), Line(origin = {42.8774, -51.0378}, points = {{-9, 0}, {9, 0}}, thickness = 2), Line(origin = {-25.6698, 44.9992}, points = {{-24.0029, -2.323}, {-12.0029, -14.323}, {13.9971, 17.677}}, color = {0, 170, 0}, thickness = 3), Line(origin = {-41, -40}, points = {{-11, 18}, {11, -18}}, color = {255, 0, 0}, thickness = 3), Line(origin = {-37, -39}, points = {{-19, -11}, {19, 11}}, color = {255, 0, 0}, thickness = 3)}));
-
-end Tests;
